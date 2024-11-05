@@ -5,14 +5,14 @@ import Clientes.Cliente;
 public class Reserva {
 
     private Cliente cliente;
-    private String fechaCheckIn;
-    private String fechaCheckOut;
+    private String fechaCheckin;
+    private String fechaCheckout;
     private Habitacion habitacion;
 
     public Reserva(Cliente cliente, String fechaCheck, String fechaCheck1, Habitacion habitacion) {
         this.cliente = cliente;
-        this.fechaCheckIn = fechaCheckIn;
-        this.fechaCheckOut = fechaCheckOut;
+        this.fechaCheckin = fechaCheckin;
+        this.fechaCheckout = fechaCheckout;
         this.habitacion = habitacion;
     }
 
@@ -26,20 +26,20 @@ public class Reserva {
         this.cliente = cliente;
     }
 
-    public String getFechaCheckIn() {
-        return fechaCheckIn;
+    public String getFechaCheckout() {
+        return fechaCheckout;
     }
 
-    public void setFechaCheckIn(String fechaCheckIn) {
-        this.fechaCheckIn = fechaCheckIn;
+    public void setFechaCheckout(String fechaCheckout) {
+        this.fechaCheckout = fechaCheckout;
     }
 
-    public String getFechaCheckOut() {
-        return fechaCheckOut;
+    public String getFechaCheckin() {
+        return fechaCheckin;
     }
 
-    public void setFechaCheckOut(String fechaCheckOut) {
-        this.fechaCheckOut = fechaCheckOut;
+    public void setFechaCheckin(String fechaCheckin) {
+        this.fechaCheckin = fechaCheckin;
     }
 
     public Habitacion getHabitacion() {
@@ -54,9 +54,12 @@ public class Reserva {
     public String toString() {
         return "Reserva{" +
                 "cliente=" + cliente +
-                ", fechaCheckIn='" + fechaCheckIn + '\'' +
-                ", fechaCheckOut='" + fechaCheckOut + '\'' +
+                ", fechaCheck='" + fechaCheckin + '\'' +
+                ", fechaCheck='" + fechaCheckout + '\'' +
                 ", habitacion=" + habitacion +
                 '}';
     }
+
+
+
 }

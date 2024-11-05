@@ -9,7 +9,7 @@ public class Reserva {
     private String fechaCheckout;
     private Habitacion habitacion;
 
-    public Reserva(Cliente cliente, String fechaCheck, String fechaCheck1, Habitacion habitacion) {
+    public Reserva(Cliente cliente, String fechaCheckin, String fechaCheckout, Habitacion habitacion) {
         this.cliente = cliente;
         this.fechaCheckin = fechaCheckin;
         this.fechaCheckout = fechaCheckout;

@@ -51,4 +51,13 @@ public class Cliente extends Persona {
     public int hashCode() {
         return Objects.hashCode(getDni());
     }
+
+    @Override
+    public String toString() {
+        return "Cliente{" +super.toString()+
+                "nacionalidad='" + nacionalidad + '\'' +
+                ", domicilio=" + domicilio +
+                ", dni='" + dni + '\'' +
+                '}';
+    }
 }

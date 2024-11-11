@@ -2,6 +2,8 @@ package Reserva;
 
 import Clientes.Cliente;
 
+import java.util.Random;
+
 public class Reserva {
 
     private int id;
@@ -13,7 +15,7 @@ public class Reserva {
     /// -----------------------------------------------------------------------------------------------------------------
 
     public Reserva(int id, String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
-        this.id = id;
+        this.id = generarId();
         this.dniCliente = dniCliente;
         this.checkIn = checkIn;
         this.checkOut = checkOut;
@@ -21,12 +23,18 @@ public class Reserva {
     }
 
     public Reserva() {
+        this.id=generarId();
     }
 
     /// -----------------------------------------------------------------------------------------------------------------
 
     public int getId() {
         return id;
+    }
+
+    private int generarId(){
+        Random rand= new Random();
+        return rand.nextInt(1_000_000);
     }
 
     public void setId(int id) {

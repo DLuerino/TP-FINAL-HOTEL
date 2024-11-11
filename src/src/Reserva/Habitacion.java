@@ -1,6 +1,6 @@
 package Reserva;
 
-import Enums.EstadoHabitacion;
+import ENUMS.EstadoHabitacion;
 
 public class Habitacion {
 

@@ -1,6 +1,6 @@
 package Clientes;
 
-import Personas.Persona;
+import MODELOS.Persona;
 
 import java.util.Objects;
 

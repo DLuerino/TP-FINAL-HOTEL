@@ -1,6 +1,6 @@
 package Users;
 
-import Personas.Persona;
+import MODELOS.Persona;
 
 public class User <T extends Persona>{
     private T usuario;
@@ -10,6 +10,8 @@ public class User <T extends Persona>{
         this.usuario = usuario;
         this.contrasenia = contrasenia;
     }
+
+
 
 
 }

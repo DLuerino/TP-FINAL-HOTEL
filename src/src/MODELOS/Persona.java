@@ -1,6 +1,4 @@
-package Personas;
-
-import org.w3c.dom.ls.LSOutput;
+package MODELOS;
 
 public class Persona {
     private String nombre;

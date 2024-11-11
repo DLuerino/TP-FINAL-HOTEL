@@ -1,4 +1,4 @@
-package Enums;
+package ENUMS;
 
 public enum EstadoHabitacion {
 

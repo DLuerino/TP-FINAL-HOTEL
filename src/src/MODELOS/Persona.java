@@ -1,16 +1,22 @@
 package MODELOS;
 
 public class Persona {
-    private String nombre;
-    private String apellido;
-    private String gmail;
+    protected  String nombre;
+    protected String apellido;
+    protected String gmail;
+    protected String contraseña;
+    protected String tipoUsuario;
 
-    public Persona(String nombre, String apellido, String gmail) {
+    /// -------------------------------------------------------------------------------------------------------------
+    public Persona(String nombre, String apellido, String gmail, String contraseña, String tipoUsuario) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.gmail = gmail;
+        this.contraseña = contraseña;
+        this.tipoUsuario = tipoUsuario;
     }
 
+    /// -------------------------------------------------------------------------------------------------------------
     public String getNombre() {
         return nombre;
     }
@@ -35,12 +41,33 @@ public class Persona {
         this.gmail = gmail;
     }
 
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
+    }
+
+    public String getTipoUsuario() {
+        return tipoUsuario;
+    }
+
+    public void setTipoUsuario(String tipoUsuario) {
+        this.tipoUsuario = tipoUsuario;
+    }
+
+    /// -------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Persona{" +
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", gmail='" + gmail + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                ", tipoUsuario='" + tipoUsuario + '\'' +
                 '}';
     }
+    /// -------------------------------------------------------------------------------------------------------------
+
 }

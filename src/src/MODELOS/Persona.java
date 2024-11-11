@@ -15,7 +15,6 @@ public class Persona {
         this.contraseña = contraseña;
         this.tipoUsuario = tipoUsuario;
     }
-
     /// -------------------------------------------------------------------------------------------------------------
     public String getNombre() {
         return nombre;

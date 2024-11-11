@@ -1,4 +1,4 @@
-package CLIENTES;
+package Clientes;
 
 import MODELOS.Persona;
 
@@ -9,12 +9,20 @@ public class Cliente extends Persona {
     private Domicilio domicilio;
     private String dni;
 
-    public Cliente(String nombre, String apellido, String gmail, String nacionalidad, Domicilio domicilio, String dni) {
-        super(nombre, apellido, gmail);
+    public Cliente(String nombre, String apellido, String gmail, String contraseña, String tipoUsuario, String nacionalidad, Domicilio domicilio, String dni) {
+        super(nombre, apellido, gmail, contraseña);
+        this.tipoUsuario = "cliente";
         this.nacionalidad = nacionalidad;
         this.domicilio = domicilio;
         this.dni = dni;
     }
+
+    public Cliente() {
+        this.tipoUsuario = "cliente";
+    }
+
+    /// ---------------------------------------------------------------------------------------------------------------
+
 
     public String getNacionalidad() {
         return nacionalidad;
@@ -39,19 +47,18 @@ public class Cliente extends Persona {
     public void setDni(String dni) {
         this.dni = dni;
     }
-
+    /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof Cliente cliente)) return false;
         return Objects.equals(getDni(), cliente.getDni());
     }
-
     @Override
     public int hashCode() {
         return Objects.hashCode(getDni());
     }
-
+    /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Cliente{" +super.toString()+

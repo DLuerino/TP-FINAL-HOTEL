@@ -1,65 +1,80 @@
 package Reserva;
 
-import CLIENTES.Cliente;
+import Clientes.Cliente;
 
 public class Reserva {
 
-    private Cliente cliente;
-    private String fechaCheckin;
-    private String fechaCheckout;
-    private Habitacion habitacion;
+    private int id;
+    private String dniCliente;
+    private String checkIn;
+    private String checkOut;
+    private int numeroHabitacionReservada;
 
-    public Reserva(Cliente cliente, String fechaCheckin, String fechaCheckout, Habitacion habitacion) {
-        this.cliente = cliente;
-        this.fechaCheckin = fechaCheckin;
-        this.fechaCheckout = fechaCheckout;
-        this.habitacion = habitacion;
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    public Reserva(int id, String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
+        this.id = id;
+        this.dniCliente = dniCliente;
+        this.checkIn = checkIn;
+        this.checkOut = checkOut;
+        this.numeroHabitacionReservada = numeroHabitacionReservada;
     }
 
-    public Reserva() {}
-
-    public Cliente getCliente() {
-        return cliente;
+    public Reserva() {
     }
 
-    public void setCliente(Cliente cliente) {
-        this.cliente = cliente;
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    public int getId() {
+        return id;
     }
 
-    public String getFechaCheckout() {
-        return fechaCheckout;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public void setFechaCheckout(String fechaCheckout) {
-        this.fechaCheckout = fechaCheckout;
+    public String getDniCliente() {
+        return dniCliente;
     }
 
-    public String getFechaCheckin() {
-        return fechaCheckin;
+    public void setDniCliente(String dniCliente) {
+        this.dniCliente = dniCliente;
     }
 
-    public void setFechaCheckin(String fechaCheckin) {
-        this.fechaCheckin = fechaCheckin;
+    public String getCheckIn() {
+        return checkIn;
     }
 
-    public Habitacion getHabitacion() {
-        return habitacion;
+    public void setCheckIn(String checkIn) {
+        this.checkIn = checkIn;
     }
 
-    public void setHabitacion(Habitacion habitacion) {
-        this.habitacion = habitacion;
+    public String getCheckOut() {
+        return checkOut;
     }
+
+    public void setCheckOut(String checkOut) {
+        this.checkOut = checkOut;
+    }
+
+    public int getNumeroHabitacionReservada() {
+        return numeroHabitacionReservada;
+    }
+
+    public void setNumeroHabitacionReservada(int numeroHabitacionReservada) {
+        this.numeroHabitacionReservada = numeroHabitacionReservada;
+    }
+
+    /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public String toString() {
         return "Reserva{" +
-                "cliente=" + cliente +
-                ", fechaCheck='" + fechaCheckin + '\'' +
-                ", fechaCheck='" + fechaCheckout + '\'' +
-                ", habitacion=" + habitacion +
+                "id=" + id +
+                ", dniCliente='" + dniCliente + '\'' +
+                ", checkIn='" + checkIn + '\'' +
+                ", checkOut='" + checkOut + '\'' +
+                ", numeroHabitacionReservada=" + numeroHabitacionReservada +
                 '}';
     }
-
-
-
 }

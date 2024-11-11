@@ -8,13 +8,16 @@ public class Persona {
     protected String tipoUsuario;
 
     /// -------------------------------------------------------------------------------------------------------------
-    public Persona(String nombre, String apellido, String gmail, String contraseña, String tipoUsuario) {
+    public Persona(String nombre, String apellido, String gmail, String contraseña ) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.gmail = gmail;
         this.contraseña = contraseña;
-        this.tipoUsuario = tipoUsuario;
     }
+
+    public Persona() {
+    }
+
     /// -------------------------------------------------------------------------------------------------------------
     public String getNombre() {
         return nombre;

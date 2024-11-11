@@ -1,12 +1,13 @@
 package Reserva;
 
-import ENUMS.EstadoHabitacion;
+import Enums.EstadoHabitacion;
 
 public class Habitacion {
 
     private int numeroHabitacion;
     private boolean disponibilidad;
     private EstadoHabitacion estado;
+    /// -----------------------------------------------------------------------------------------------------------------
 
     public Habitacion(int numeroHabitacion, boolean disponibilidad, EstadoHabitacion estado) {
         this.numeroHabitacion = numeroHabitacion;
@@ -15,6 +16,7 @@ public class Habitacion {
     }
 
     public Habitacion() {}
+    /// -----------------------------------------------------------------------------------------------------------------
 
     public int getNumeroHabitacion() {
         return numeroHabitacion;
@@ -39,7 +41,7 @@ public class Habitacion {
     public void setEstado(EstadoHabitacion estado) {
         this.estado = estado;
     }
-
+    /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Habitacion{" +

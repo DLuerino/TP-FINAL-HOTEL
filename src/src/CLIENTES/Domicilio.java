@@ -1,4 +1,4 @@
-package Clientes;
+package CLIENTES;
 
 public class Domicilio {
     private String calle;

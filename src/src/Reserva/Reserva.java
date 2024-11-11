@@ -1,6 +1,6 @@
 package Reserva;
 
-import Clientes.Cliente;
+import CLIENTES.Cliente;
 
 public class Reserva {
 

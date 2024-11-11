@@ -1,4 +1,4 @@
-package Clientes;
+package CLIENTES;
 
 import MODELOS.Persona;
 

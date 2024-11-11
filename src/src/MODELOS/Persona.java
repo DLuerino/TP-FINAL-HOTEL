@@ -5,8 +5,6 @@ public class Persona {
     protected String apellido;
     protected String gmail;
     protected String contraseña;
-    protected String tipoUsuario;
-
     /// -------------------------------------------------------------------------------------------------------------
     public Persona(String nombre, String apellido, String gmail, String contraseña ) {
         this.nombre = nombre;
@@ -51,13 +49,6 @@ public class Persona {
         this.contraseña = contraseña;
     }
 
-    public String getTipoUsuario() {
-        return tipoUsuario;
-    }
-
-    public void setTipoUsuario(String tipoUsuario) {
-        this.tipoUsuario = tipoUsuario;
-    }
 
     /// -------------------------------------------------------------------------------------------------------------
     @Override
@@ -67,7 +58,6 @@ public class Persona {
                 ", apellido='" + apellido + '\'' +
                 ", gmail='" + gmail + '\'' +
                 ", contraseña='" + contraseña + '\'' +
-                ", tipoUsuario='" + tipoUsuario + '\'' +
                 '}';
     }
     /// -------------------------------------------------------------------------------------------------------------

@@ -36,7 +36,7 @@ public class Habitacion {
         this.estado = estado;
     }
 
-    /// Verificar si la habitación está disponible para un rango de fechas
+    ///Verificar si la habitación está disponible para un rango de fechas
     public boolean estaDisponible(String checkIn, String checkOut) {
         if (estado != EstadoHabitacion.DISPONIBLE) {
             return false;  /// Si la habitación no está disponible, retornamos false

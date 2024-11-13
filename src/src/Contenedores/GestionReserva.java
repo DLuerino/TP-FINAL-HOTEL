@@ -41,6 +41,15 @@ public class GestionReserva {
             }
         }
 
+        /// DUDA: COMO MANEJAR LA DISPONIBILIDAD POR FECHAS, TENIENDO EN CUENTA QUE DESDE EL CHECK-IN HASTA EL CHECK-OUT ESTA OCUPADA, PERO DESPUES DE ESE PLAZO YA DEBERIA ESTAR DISPONIBLE
+        /// PREGUNTR ESO;
+
+//        for(Reserva res : listaReservas){
+//            if (reserva.getCheckIn().compareTo(reserva.getCheckOut()) < 0 && reserva.getCheckOut().compareTo(reserva.getCheckIn()) > 0){
+//                habDisponibles.add(new Habitacion(reserva.getNumeroHabitacionReservada(), EstadoHabitacion.DISPONIBLE));
+//            }
+//        }
+
         if(habDisponibles.isEmpty()){
             throw new NoDisponibleException("No hay habitaciones disponibles para estas fechas!");
         }

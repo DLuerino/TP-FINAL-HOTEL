@@ -2,20 +2,22 @@ package Reserva;
 
 import Enums.EstadoHabitacion;
 
+import java.util.ArrayList;
+
 public class Habitacion {
 
     private int numeroHabitacion;
-    private boolean disponibilidad;
     private EstadoHabitacion estado;
+    private ArrayList<Reserva> listaReservas;
     /// -----------------------------------------------------------------------------------------------------------------
 
-    public Habitacion(int numeroHabitacion, boolean disponibilidad, EstadoHabitacion estado) {
+    public Habitacion(int numeroHabitacion, EstadoHabitacion estado) {
         this.numeroHabitacion = numeroHabitacion;
-        this.disponibilidad = disponibilidad;
         this.estado = estado;
+        this.listaReservas=new ArrayList<>();
     }
 
-    public Habitacion() {}
+    public Habitacion() {this.listaReservas=new ArrayList<>();}
     /// -----------------------------------------------------------------------------------------------------------------
 
     public int getNumeroHabitacion() {
@@ -26,14 +28,6 @@ public class Habitacion {
         this.numeroHabitacion = numeroHabitacion;
     }
 
-    public boolean isDisponibilidad() {
-        return disponibilidad;
-    }
-
-    public void setDisponibilidad(boolean disponibilidad) {
-        this.disponibilidad = disponibilidad;
-    }
-
     public EstadoHabitacion getEstado() {
         return estado;
     }
@@ -41,12 +35,28 @@ public class Habitacion {
     public void setEstado(EstadoHabitacion estado) {
         this.estado = estado;
     }
+
+    /// Verificar si la habitación está disponible para un rango de fechas
+    public boolean estaDisponible(String checkIn, String checkOut) {
+        if (estado != EstadoHabitacion.DISPONIBLE) {
+            return false;  /// Si la habitación no está disponible, retornamos false
+        }
+
+        for (Reserva reserva : listaReservas) {
+            if (reserva.getCheckIn().compareTo(checkOut) < 0 && reserva.getCheckOut().compareTo(checkIn) > 0) {
+                return false;  /// La habitación ya está ocupada en el rango de fechas
+            }
+        }
+
+        return true;  /// La habitación está disponible
+    }
+
     /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
         return "Habitacion{" +
                 "numeroHabitacion=" + numeroHabitacion +
-                ", disponibilidad=" + disponibilidad +
+                ", disponibilidad=" +
                 ", estado=" + estado +
                 '}';
     }

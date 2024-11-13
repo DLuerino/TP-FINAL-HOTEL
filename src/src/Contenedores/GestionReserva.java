@@ -1,20 +1,25 @@
 package Contenedores;
 
+import Enums.EstadoHabitacion;
+import Excepciones.NoDisponibleException;
 import Reserva.Reserva;
-
+import Reserva.Habitacion;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 
 public class GestionReserva {
     private HashMap<String, HashSet<Reserva>> listaReservas;
+    private ArrayList<Habitacion> listaHabitaciones;
     // ------------------------------------------------------------------------------------------------------------
     public GestionReserva(HashMap<String, HashSet<Reserva>> listaReservas) {
         this.listaReservas = new HashMap<>();
+        this.listaHabitaciones=new ArrayList<>();
     }
 
     public GestionReserva(){
         this.listaReservas = new HashMap<>();
+        this.listaHabitaciones=new ArrayList<>();
     }
     // ------------------------------------------------------------------------------------------------------------
 
@@ -22,15 +27,38 @@ public class GestionReserva {
         return listaReservas;
     }
 
-    public void addReserva(String dniCliente, Reserva reserva){
+    public void addHabitacion(Habitacion habitacion){
+        listaHabitaciones.add(habitacion);
+    }
+
+    public void addReserva(Reserva reserva) throws NoDisponibleException {
+        /// verificar disponibilidad
+        ArrayList<Habitacion> habDisponibles=new ArrayList<>();
+
+        for(Habitacion habitacion : listaHabitaciones){
+            if(habitacion.estaDisponible(reserva.getCheckIn(), reserva.getCheckOut())){
+                habDisponibles.add(habitacion);
+            }
+        }
+
+        if(habDisponibles.isEmpty()){
+            throw new NoDisponibleException("No hay habitaciones disponibles para estas fechas!");
+        }
+
+        Habitacion seleccionada= habDisponibles.get(0);
+        reserva.setNumeroHabitacionReservada(seleccionada.getNumeroHabitacion());
+
         ///verifica si el cliente ya tiene alguna reserva
-        if(!listaReservas.containsKey(dniCliente)){
+        if(!listaReservas.containsKey(reserva.getDniCliente())){
             ///por que no existe crea uno
-            listaReservas.put(dniCliente, new HashSet<>());
+            listaReservas.put(reserva.getDniCliente(), new HashSet<>());
         }
 
         ///agrega la reserva al conjunto del cliente
-        listaReservas.get(dniCliente).add(reserva);
+        listaReservas.get(reserva.getDniCliente()).add(reserva);
+
+        seleccionada.setEstado(EstadoHabitacion.OCUPADA);
+
     }
 
     public HashSet<Reserva> getReservasXcliente(String dniCliente){

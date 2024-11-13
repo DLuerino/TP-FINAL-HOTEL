@@ -16,7 +16,7 @@ public class Reserva {
 
     /// -----------------------------------------------------------------------------------------------------------------
 
-    public Reserva( String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
+    public Reserva(String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
         this.id = generarId();
         this.dniCliente = dniCliente;
         this.checkIn = checkIn;
@@ -30,6 +30,13 @@ public class Reserva {
 
     public Reserva(String nueva){
         this.id=generarId();
+    }
+
+    public Reserva(String dniCliente, String checkIn, String checkOut) {
+        this.id=generarId();
+        this.dniCliente=dniCliente;
+        this.checkIn=checkIn;
+        this.checkOut=checkOut;
     }
 
     /// -----------------------------------------------------------------------------------------------------------------

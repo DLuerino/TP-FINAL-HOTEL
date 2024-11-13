@@ -2,6 +2,7 @@ package Reserva;
 
 import Clientes.Cliente;
 
+import java.util.HashSet;
 import java.util.Random;
 
 public class Reserva {
@@ -11,10 +12,11 @@ public class Reserva {
     private String checkIn;
     private String checkOut;
     private int numeroHabitacionReservada;
+    private static HashSet<Integer> idGenerados=new HashSet<>();
 
     /// -----------------------------------------------------------------------------------------------------------------
 
-    public Reserva(int id, String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
+    public Reserva( String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
         this.id = generarId();
         this.dniCliente = dniCliente;
         this.checkIn = checkIn;
@@ -26,15 +28,27 @@ public class Reserva {
         this.id=generarId();
     }
 
+    public Reserva(String nueva){
+        this.id=generarId();
+    }
+
     /// -----------------------------------------------------------------------------------------------------------------
 
     public int getId() {
         return id;
     }
 
-    private int generarId(){
+    private static int generarId(){
         Random rand= new Random();
-        return rand.nextInt(1_000_000);
+        int id;
+
+        do{
+            id=rand.nextInt(1_000_000);
+        }while(idGenerados.contains(id)); ///si el id ya esta generado, lo que hace es generar uno nuevo
+
+        idGenerados.add(id); ///agrega el id al conjunto
+
+        return id;
     }
 
     public void setId(int id) {

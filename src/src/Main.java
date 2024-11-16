@@ -21,7 +21,7 @@ public class Main {
 
         GestionReserva listaReservas=new GestionReserva();
 
-        for(int i=1; i<5; i++){
+        for(int i=1; i<4; i++){
             listaReservas.addHabitacion(new Habitacion(i, EstadoHabitacion.DISPONIBLE));
         }
 
@@ -30,13 +30,16 @@ public class Main {
         listaReservas.addReserva(res3);
         listaReservas.addReserva(res4);
 
+        System.out.println(listaReservas.getListaHabitaciones().toString());
 
-        Reserva res5=new Reserva("76321672", "2024-01-06", "2024-01-8");
+
+       /* Reserva res5=new Reserva("76321672", "2024-01-06", "2024-01-8");
         listaReservas.addReserva(res5);
 
         Reserva res6=new Reserva("76321672", "2024-01-06", "2024-01-8");
         listaReservas.addReserva(res6);
-        System.out.println(listaReservas.mostrarTodasLasReservas());
+        System.out.println(listaReservas.mostrarTodasLasReservas()); */
+
 
 
 

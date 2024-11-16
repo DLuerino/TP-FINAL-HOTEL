@@ -27,6 +27,12 @@ public class GestionReserva {
         return listaReservas;
     }
 
+
+    public ArrayList<Habitacion> getListaHabitaciones() {
+        return listaHabitaciones;
+    }
+
+
     public void addHabitacion(Habitacion habitacion){
         listaHabitaciones.add(habitacion);
     }
@@ -36,9 +42,8 @@ public class GestionReserva {
         ArrayList<Habitacion> habDisponibles=new ArrayList<>();
 
         for(Habitacion habitacion : listaHabitaciones){
-            if(habitacion.estaDisponible(reserva.getCheckIn(), reserva.getCheckOut())){
-                habDisponibles.add(habitacion);
-            }
+
+
         }
 
         /// DUDA: COMO MANEJAR LA DISPONIBILIDAD POR FECHAS, TENIENDO EN CUENTA QUE DESDE EL CHECK-IN HASTA EL CHECK-OUT ESTA OCUPADA, PERO DESPUES DE ESE PLAZO YA DEBERIA ESTAR DISPONIBLE

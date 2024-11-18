@@ -2,6 +2,7 @@ package Reserva;
 
 import Clientes.Cliente;
 
+import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Random;
 
@@ -9,14 +10,14 @@ public class Reserva {
 
     private int id;
     private String dniCliente;
-    private String checkIn;
-    private String checkOut;
+    private LocalDate checkIn;
+    private LocalDate checkOut;
     private int numeroHabitacionReservada;
     private static HashSet<Integer> idGenerados=new HashSet<>();
 
     /// -----------------------------------------------------------------------------------------------------------------
 
-    public Reserva(String dniCliente, String checkIn, String checkOut, int numeroHabitacionReservada) {
+    public Reserva(String dniCliente, LocalDate checkIn, LocalDate checkOut, int numeroHabitacionReservada) {
         this.id = generarId();
         this.dniCliente = dniCliente;
         this.checkIn = checkIn;
@@ -32,7 +33,7 @@ public class Reserva {
         this.id=generarId();
     }
 
-    public Reserva(String dniCliente, String checkIn, String checkOut) {
+    public Reserva(String dniCliente, LocalDate checkIn, LocalDate checkOut) {
         this.id=generarId();
         this.dniCliente=dniCliente;
         this.checkIn=checkIn;
@@ -70,19 +71,19 @@ public class Reserva {
         this.dniCliente = dniCliente;
     }
 
-    public String getCheckIn() {
+    public LocalDate getCheckIn() {
         return checkIn;
     }
 
-    public void setCheckIn(String checkIn) {
+    public void setCheckIn(LocalDate checkIn) {
         this.checkIn = checkIn;
     }
 
-    public String getCheckOut() {
+    public LocalDate getCheckOut() {
         return checkOut;
     }
 
-    public void setCheckOut(String checkOut) {
+    public void setCheckOut(LocalDate checkOut) {
         this.checkOut = checkOut;
     }
 

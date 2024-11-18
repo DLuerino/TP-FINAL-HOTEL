@@ -39,9 +39,7 @@ public class Habitacion {
     public String toString() {
         return "Habitacion{" +
                 "numeroHabitacion=" + numeroHabitacion +
-                ", disponibilidad=" +
                 ", estado=" + estado +
                 '}';
     }
-
 }

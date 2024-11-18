@@ -1,12 +1,13 @@
 package Contenedores;
 
+import Clientes.Cliente;
 import Enums.EstadoHabitacion;
 import Excepciones.NoDisponibleException;
 import Reserva.Reserva;
 import Reserva.Habitacion;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
+
+import java.security.PublicKey;
+import java.util.*;
 
 public class GestionReserva {
     private HashMap<String, HashSet<Reserva>> listaReservas;
@@ -22,6 +23,16 @@ public class GestionReserva {
         this.listaHabitaciones=new ArrayList<>();
     }
     /// -----------------------------------------*-----------------------------------------
+    /// METODOS PARA INICIALIZAR
+    public void inciicalizarLasHabitaciones()
+    {
+     for(int i =1; i<51;i++)
+     {
+         listaHabitaciones.add(new Habitacion(i,EstadoHabitacion.DISPONIBLE));
+     }
+    }
+
+    /// -----------------------------------------*-----------------------------------------
 
     /// metodo agregar el dni de un cliente recien registrado al hashMap
     public void agregarDniDeClienteNuevo(String dniCliente)
@@ -30,41 +41,6 @@ public class GestionReserva {
     }
 
     /// -----------------------------------------*-----------------------------------------
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    public HashSet<Reserva> getReservasXcliente(String dniCliente){
-        return listaReservas.getOrDefault(dniCliente, new HashSet<>());
-    }
-
 
 
     public String removeReserva(String dniCliente, Reserva reserva){
@@ -85,7 +61,8 @@ public class GestionReserva {
 
 
 
-
+    /// -----------------------------------------*-----------------------------------------
+     /// METODOS PARA MOSTRAR
 
     public String mostrarTodasLasReservas(){
         StringBuilder sb=new StringBuilder();
@@ -109,4 +86,21 @@ public class GestionReserva {
         /// retornar el SB convertido a String
         return sb.toString();
     }
+
+
+    public String mostrarHabitaciones()
+    {
+        String mensaje = "";
+        ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
+        while(recorredor.hasNext())
+        {
+            Habitacion habitacion = recorredor.next();
+            mensaje = mensaje.concat(habitacion.toString()+"\n");
+
+        }
+        return mensaje;
+    }
+
+    /// -----------------------------------------*-----------------------------------------
+
 }

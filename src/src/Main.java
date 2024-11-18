@@ -64,12 +64,10 @@ public class Main {
         System.out.println(""+listaClientes.getListaRegistros());
         System.out.println(""+gestionReserva.mostrarTodasLasReservas()); */
 
-       LocalDate fecha = LocalDate.of(2024,10,10);
-       if(fecha<LocalDate.now())
-       {
 
-       }
-
+        GestionReserva gestionReserva = new GestionReserva();
+        gestionReserva.inciicalizarLasHabitaciones();
+        System.out.println(gestionReserva.mostrarHabitaciones());
 
     }
 }

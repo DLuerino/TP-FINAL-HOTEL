@@ -69,28 +69,9 @@ public class Cliente extends Persona {
 
     public void verificarCliente() throws ErrorAlIngresarException {
 
-        if(this.nombre == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un nombre. ");
+        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.nacionalidad.isEmpty() || this.dni.isEmpty() || this.contraseña.isEmpty() || this.gmail.isEmpty()){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio. ");
         }
-        if(this.apellido == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un apellido. ");
-        }
-        if(this.nacionalidad == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con una nacionalidad. ");
-        }
-        if(this.dni == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un DNI. ");
-        }
-        if(this.domicilio == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un domicilio. ");
-        }
-        if(this.contraseña == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con una contraseña valida. ");
-        }
-        if(this.gmail == null){
-            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un gmail. ");
-        }
-
     }
 
 }

@@ -34,6 +34,15 @@ public class GestionReserva {
 
     /// -----------------------------------------*-----------------------------------------
 
+
+
+
+
+
+
+
+
+    /// -----------------------------------------*-----------------------------------------
     /// metodo agregar el dni de un cliente recien registrado al hashMap
     public void agregarDniDeClienteNuevo(String dniCliente)
     {

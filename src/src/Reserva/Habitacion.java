@@ -1,18 +1,23 @@
 package Reserva;
 
 import Enums.EstadoHabitacion;
+import Excepciones.ReservaYaRegistradaException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class Habitacion {
 
     private int numeroHabitacion;
     private EstadoHabitacion estado;
+    private ArrayList<Reserva> listaReservas;
     /// -----------------------------------------------------------------------------------------------------------------
 
     public Habitacion(int numeroHabitacion, EstadoHabitacion estado) {
         this.numeroHabitacion = numeroHabitacion;
         this.estado = estado;
+        this.listaReservas = new ArrayList<>();
     }
 
     /// -----------------------------------------------------------------------------------------------------------------
@@ -40,6 +45,27 @@ public class Habitacion {
         return "Habitacion{" +
                 "numeroHabitacion=" + numeroHabitacion +
                 ", estado=" + estado +
+                ", listaReservas=" + listaReservas +
                 '}';
     }
+
+    /// ---------------------------------------------------------------------------------------------------------------
+    public void agregarReserva(Reserva reservita) throws ReservaYaRegistradaException
+    {
+        if(listaReservas.contains(reservita))
+        {
+         throw new ReservaYaRegistradaException("La reserva ya se encuentra registrada en el sistema");
+        }
+    }
+    /// ---------------------------------------------------------------------------------------------------------------
+    public boolean estaDisponible(LocalDate checkIn, LocalDate checkOut) {
+        for (Reserva reserva : listaReservas) {
+            // Verificar solapamiento
+            if (!(checkOut.isBefore(reserva.getCheckIn()) || checkIn.isAfter(reserva.getCheckOut()))) {
+                return false;
+            }
+        }
+        return true; // No hay solapamientos, está disponible
+    }
+
 }

@@ -26,7 +26,7 @@ public class GestionGeneral<T> {
     /// METODOS PARA CLASE GENERICA
 
     /// AGREGAR
-    public void agregarElemento(T objeto) throws ObjetoYaRegistradoException
+    public void agregarObjeto(T objeto) throws ObjetoYaRegistradoException
     {
         if(listaRegistros.contains(objeto))
         {
@@ -39,7 +39,7 @@ public class GestionGeneral<T> {
 
     /// ELIMINAR
 
-    public void eliminarElemento(T objeto) throws ObjetoNoRegistradoException
+    public void eliminarObjeto(T objeto) throws ObjetoNoRegistradoException
     {
         if(!listaRegistros.contains(objeto))
         {

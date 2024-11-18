@@ -1,5 +1,6 @@
 package Clientes;
 
+import Excepciones.ErrorAlIngresarException;
 import MODELOS.Persona;
 
 import java.util.Objects;
@@ -65,4 +66,31 @@ public class Cliente extends Persona {
                 ", dni='" + dni + '\'' +
                 '}';
     }
+
+    public void verificarCliente() throws ErrorAlIngresarException {
+
+        if(this.nombre == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un nombre. ");
+        }
+        if(this.apellido == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un apellido. ");
+        }
+        if(this.nacionalidad == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con una nacionalidad. ");
+        }
+        if(this.dni == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un DNI. ");
+        }
+        if(this.domicilio == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un domicilio. ");
+        }
+        if(this.contraseña == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con una contraseña valida. ");
+        }
+        if(this.gmail == null){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio con un gmail. ");
+        }
+
+    }
+
 }

@@ -53,12 +53,11 @@ public class Persona {
     /// -------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Persona{" +
+        return
                 "nombre='" + nombre + '\'' +
                 ", apellido='" + apellido + '\'' +
                 ", gmail='" + gmail + '\'' +
-                ", contraseña='" + contraseña + '\'' +
-                '}';
+                ", contraseña='" + contraseña + '\'';
     }
     /// -------------------------------------------------------------------------------------------------------------
 

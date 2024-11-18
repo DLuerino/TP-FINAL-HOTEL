@@ -10,7 +10,7 @@ public class GestionGeneral<T> {
     private HashSet<T> listaRegistros;
     // ------------------------------------------------------------------------------------------------------------
 
-    public GestionGeneral(HashSet<T> listaRegistros) {
+    public GestionGeneral() {
         this.listaRegistros = new HashSet<>();
     }
 

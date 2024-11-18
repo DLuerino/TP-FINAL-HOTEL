@@ -1,6 +1,8 @@
 package Reserva;
 
 import Clientes.Cliente;
+import Excepciones.ErrorAlIngresarException;
+import Excepciones.ErrorFechaException;
 
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -15,7 +17,7 @@ public class Reserva {
     private int numeroHabitacionReservada;
     private static HashSet<Integer> idGenerados=new HashSet<>();
 
-    /// -----------------------------------------------------------------------------------------------------------------
+    /// -----------------------------------------*-----------------------------------------
 
     public Reserva(String dniCliente, LocalDate checkIn, LocalDate checkOut, int numeroHabitacionReservada) {
         this.id = generarId();
@@ -40,7 +42,7 @@ public class Reserva {
         this.checkOut=checkOut;
     }
 
-    /// -----------------------------------------------------------------------------------------------------------------
+    /// -----------------------------------------*-----------------------------------------
 
     public int getId() {
         return id;
@@ -95,7 +97,7 @@ public class Reserva {
         this.numeroHabitacionReservada = numeroHabitacionReservada;
     }
 
-    /// -----------------------------------------------------------------------------------------------------------------
+    /// -----------------------------------------*-----------------------------------------
 
     @Override
     public String toString() {
@@ -107,4 +109,27 @@ public class Reserva {
                 ", numeroHabitacionReservada=" + numeroHabitacionReservada +
                 '}';
     }
+
+    /// -----------------------------------------*-----------------------------------------
+
+    /// metodo para verificar reserva
+    public void verificarDatosReserva() throws ErrorAlIngresarException
+    {
+        if(dniCliente.isEmpty())
+        {
+            throw new ErrorAlIngresarException("Hay campos sin completar correctamente..");
+        }
+        if(checkIn.isBefore(LocalDate.now()))
+        {
+            throw new ErrorFechaException("La fecha checkIn no puede ser menor a la fecha actual... ");
+        }
+        if(checkOut.isBefore(LocalDate.now()))
+        {
+            throw new ErrorFechaException("Le fecha checkOut no puede ser menor a la fecha actual");
+        }
+    }
+
+
+
+
 }

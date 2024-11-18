@@ -23,6 +23,42 @@ public class GestionReserva {
     }
     /// -----------------------------------------*-----------------------------------------
 
+    /// metodo agregar el dni de un cliente recien registrado al hashMap
+    public void agregarDniDeClienteNuevo(String dniCliente)
+    {
+        listaReservas.put(dniCliente,new HashSet<>());
+    }
+
+    /// -----------------------------------------*-----------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
     public HashSet<Reserva> getReservasXcliente(String dniCliente){

@@ -1,3 +1,5 @@
+import Clientes.Cliente;
+import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
 import Enums.EstadoHabitacion;
 import Reserva.Reserva;
@@ -40,9 +42,33 @@ public class Main {
         Reserva res6=new Reserva("76321672", "2024-01-06", "2024-01-8");
         listaReservas.addReserva(res6);
         System.out.println(listaReservas.mostrarTodasLasReservas()); */
-        
+
+       /* Cliente cliente1 = new Cliente();
+        Cliente cliente2 = new Cliente();
+        Cliente cliente3 = new Cliente();
+        cliente1.setDni("1111");
+        cliente2.setDni("2222");
+        cliente3.setDni("3333");
 
 
+        GestionGeneral<Cliente> listaClientes = new GestionGeneral<>();
+        GestionReserva gestionReserva = new GestionReserva();
+
+        listaClientes.agregarObjeto(cliente1);
+        gestionReserva.agregarDniDeClienteNuevo(cliente1.getDni());
+        listaClientes.agregarObjeto(cliente2);
+        gestionReserva.agregarDniDeClienteNuevo(cliente2.getDni());
+        listaClientes.agregarObjeto(cliente3);
+        gestionReserva.agregarDniDeClienteNuevo(cliente3.getDni());
+
+        System.out.println(""+listaClientes.getListaRegistros());
+        System.out.println(""+gestionReserva.mostrarTodasLasReservas()); */
+
+       LocalDate fecha = LocalDate.of(2024,10,10);
+       if(fecha<LocalDate.now())
+       {
+
+       }
 
 
     }

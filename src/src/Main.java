@@ -43,7 +43,7 @@ public class Main {
         listaReservas.addReserva(res6);
         System.out.println(listaReservas.mostrarTodasLasReservas()); */
 
-       /* Cliente cliente1 = new Cliente();
+        /*Cliente cliente1 = new Cliente();
         Cliente cliente2 = new Cliente();
         Cliente cliente3 = new Cliente();
         cliente1.setDni("1111");
@@ -56,7 +56,7 @@ public class Main {
 
         listaClientes.agregarObjeto(cliente1);
         gestionReserva.agregarDniDeClienteNuevo(cliente1.getDni());
-        listaClientes.agregarObjeto(cliente2);
+        listaClientes.agregarObjeto(cliente1);
         gestionReserva.agregarDniDeClienteNuevo(cliente2.getDni());
         listaClientes.agregarObjeto(cliente3);
         gestionReserva.agregarDniDeClienteNuevo(cliente3.getDni());

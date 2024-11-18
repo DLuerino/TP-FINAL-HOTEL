@@ -125,7 +125,14 @@ public class Reserva {
         }
         if(checkOut.isBefore(LocalDate.now()))
         {
-            throw new ErrorFechaException("Le fecha checkOut no puede ser menor a la fecha actual");
+            throw new ErrorFechaException("La fecha checkOut no puede ser menor a la fecha actual");
+        }
+        if(checkIn.isAfter(checkOut)) {
+            throw new ErrorFechaException("La fecha checkIn no puede ser mayor a la del checkOut");
+        }
+        if (checkOut.isBefore(checkIn))
+        {
+            throw new ErrorFechaException("La fecha checkOut no puede ser menor a la del checkIn");
         }
     }
 

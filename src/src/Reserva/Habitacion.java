@@ -38,6 +38,9 @@ public class Habitacion {
         this.estado = estado;
     }
 
+    public ArrayList<Reserva> getListaReservas() {
+        return listaReservas;
+    }
 
     /// -----------------------------------------------------------------------------------------------------------------
     @Override

@@ -7,6 +7,8 @@ import Reserva.Reserva;
 import Reserva.Habitacion;
 
 import java.security.PublicKey;
+import java.time.LocalDate;
+import java.time.chrono.ChronoLocalDate;
 import java.util.*;
 
 public class GestionReserva {
@@ -33,10 +35,43 @@ public class GestionReserva {
     }
 
     /// -----------------------------------------*-----------------------------------------
+        /// metodo buscar habitaciones disponibles
+
+    public ArrayList<Habitacion> obtenerDisponibles(LocalDate checkIn, LocalDate checkOut){
+        ArrayList<Habitacion> disponibles=new ArrayList<>();
+
+        for(Habitacion habitacion : listaHabitaciones){
+            if(habitacion.estaDisponible(checkIn, checkOut)){
+                disponibles.add(habitacion);
+            }
+        }
+
+        return disponibles;
+    }
 
 
+        /// metodo para actualizar el estado de las habitaciones
 
+    public void actualizarEstadoHabitaciones(){
+        LocalDate hoy = LocalDate.now();
 
+        for(Habitacion habitacion : listaHabitaciones){
+            Iterator<Reserva> iterator = habitacion.getListaReservas().iterator();
+
+            while(iterator.hasNext()){
+                Reserva reserva =iterator.next();
+                if(reserva.getCheckOut().isBefore(hoy)){
+                    /// es decir, la reserva ya termino
+                    iterator.remove();///por lo tanto la elimina
+                }
+            }
+
+            /// si la habitacion no tiene reservas activas, se pone como disponible
+            if(habitacion.getListaReservas().isEmpty()){
+                habitacion.setEstado(EstadoHabitacion.DISPONIBLE);
+            }
+        }
+    }
 
 
 

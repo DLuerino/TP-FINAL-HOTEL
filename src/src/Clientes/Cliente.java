@@ -5,6 +5,7 @@ import MODELOS.Persona;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.time.LocalDate;
 import java.util.Objects;
 
 public class Cliente extends Persona{
@@ -92,24 +93,14 @@ public class Cliente extends Persona{
     }
 
     public static Cliente fromJSON(JSONObject o) {
-        Cliente cliente = null;
+        Cliente cliente = new Cliente();
         try {
-            /// Usar el método JsonAObj de Persona para atributos base
-            Persona persona = Persona.fromJSON(o);
-
-            /// Obtener atributos específicos de Cliente
-            String nacionalidad = o.getString("nacionalidad");
-            String dni = o.getString("dni");
-
-            /// Convertir el domicilio si existe
-            Domicilio domicilio = null;
-            if (!o.isNull("domicilio")) {
-                JSONObject domicilioJson = o.getJSONObject("domicilio");
-                domicilio = Domicilio.fromJSON(domicilioJson);
-            }
-
-            // Crear el objeto Cliente con datos de Persona y atributos adicionales
-            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), nacionalidad, domicilio, dni);
+            cliente.setNombre(o.getString("nombre"));
+            cliente.setApellido(o.getString("apellido"));
+            cliente.setGmail(o.getString("correoElectronico"));
+            cliente.setDni(o.getString("dni"));
+            cliente.setDomicilio(Domicilio.fromJSON(o.getJSONObject("domicilio")));
+            cliente.setNacionalidad(o.getString("nacionalidad"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

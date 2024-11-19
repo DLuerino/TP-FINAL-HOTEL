@@ -76,17 +76,14 @@ public class Recepcionista extends Persona {
     }
 
     public static Recepcionista fromJSON(JSONObject o) {
-        Recepcionista recepcionista = null;
+        Recepcionista recepcionista = new Recepcionista();
         try {
-            // Obtener datos heredados
-            Persona persona = Persona.fromJSON(o);
 
-            // Obtener atributos específicos
+
             int id = o.getInt("id");
             String contraseña = o.getString("contraseña");
 
             // Crear el objeto Recepcionista
-            recepcionista = new Recepcionista(persona.getNombre(), persona.getApellido(), persona.getGmail(), id, contraseña);
         } catch (JSONException e) {
             e.printStackTrace();
         }

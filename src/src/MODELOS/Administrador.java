@@ -17,6 +17,9 @@ public class Administrador implements IJSON {
         this.contraseña = contraseña;
     }
 
+    public Administrador() {
+    }
+
     /// -----------------------------------------*-----------------------------------------
 
     public int getId() {
@@ -52,7 +55,7 @@ public class Administrador implements IJSON {
             // Agregar los atributos de la clase Administrador al JSON
             j.put("id", this.id);
             j.put("nombre", this.nombre);
-            j.put("contraseña", this.contraseña); // Si deseas no incluir la contraseña por seguridad, omítela.
+            j.put("contraseña", this.contraseña);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -60,17 +63,11 @@ public class Administrador implements IJSON {
     }
 
     public static Administrador fromJSON(JSONObject o) {
-        Administrador administrador = null;
+        Administrador administrador = new Administrador();
         try {
-            // Obtener datos heredados
-            Persona persona = Persona.fromJSON(o);
-
-            // Obtener atributos específicos
-            int id = o.getInt("id");
-            String contraseña = o.getString("contraseña");
-
-            // Crear el objeto Administrador
-            administrador = new Administrador(id, persona.getNombre(), contraseña);
+            administrador.setNombre(o.getString("nombre"));
+            administrador.setId(o.getInt("id"));
+            administrador.setContraseña(o.getString("contraseña"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

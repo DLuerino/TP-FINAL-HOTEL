@@ -14,7 +14,7 @@ public class Cliente extends Persona implements metodoJson {
     private Domicilio domicilio;
     private String dni;
 
-    public Cliente(String nombre, String apellido, String gmail, String tipoUsuario, String nacionalidad, Domicilio domicilio, String dni) {
+    public Cliente(String nombre, String apellido, String gmail, String nacionalidad, Domicilio domicilio, String dni) {
         super(nombre, apellido, gmail);
         this.nacionalidad = nacionalidad;
         this.domicilio = domicilio;
@@ -82,16 +82,11 @@ public class Cliente extends Persona implements metodoJson {
 
     @Override
     public JSONObject ObjAJson() {
-        JSONObject j = super.ObjAJson(); // Llama al método ObjAJson de Persona
+        JSONObject j = super.ObjAJson(); /// Llama al método ObjAJson de Persona
         try {
             j.put("nacionalidad", this.nacionalidad);
-            if (this.domicilio != null) {
-                j.put("domicilio", this.domicilio.ObjAJson());
-            } else {
-                j.put("domicilio", JSONObject.NULL);
-            }
+            j.put("domicilio", this.domicilio.ObjAJson());
             j.put("dni", this.dni);
-            j.put("usuario", this.tipo)
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -101,15 +96,14 @@ public class Cliente extends Persona implements metodoJson {
     public static Cliente JsonAObj(JSONObject o) {
         Cliente cliente = null;
         try {
-            // Usar el método JsonAObj de Persona para atributos base
+            /// Usar el método JsonAObj de Persona para atributos base
             Persona persona = Persona.JsonAObj(o);
 
-            // Obtener atributos específicos de Cliente
+            /// Obtener atributos específicos de Cliente
             String nacionalidad = o.getString("nacionalidad");
             String dni = o.getString("dni");
-            String tipoUsuario=o.getString("usuario");
 
-            // Convertir el domicilio si existe
+            /// Convertir el domicilio si existe
             Domicilio domicilio = null;
             if (!o.isNull("domicilio")) {
                 JSONObject domicilioJson = o.getJSONObject("domicilio");
@@ -117,7 +111,7 @@ public class Cliente extends Persona implements metodoJson {
             }
 
             // Crear el objeto Cliente con datos de Persona y atributos adicionales
-            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), tipoUsuario, nacionalidad, domicilio, dni);
+            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), nacionalidad, domicilio, dni);
         } catch (JSONException e) {
             e.printStackTrace();
         }

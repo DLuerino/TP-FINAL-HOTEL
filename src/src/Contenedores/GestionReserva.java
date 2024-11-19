@@ -2,12 +2,13 @@ package Contenedores;
 import Enums.EstadoHabitacion;
 import Excepciones.DniDeClienteNoRegistrado;
 import Excepciones.SinDisponibilidadException;
+import Interfaces.IJSON;
 import Reserva.Reserva;
 import Reserva.Habitacion;
 import java.time.LocalDate;
 import java.util.*;
 
-public class GestionReserva {
+public class GestionReserva implements IJSON {
     private HashMap<String, HashSet<Reserva>> listaReservas;
     private ArrayList<Habitacion> listaHabitaciones;
     /// -----------------------------------------*-----------------------------------------

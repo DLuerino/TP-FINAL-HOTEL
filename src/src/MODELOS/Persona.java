@@ -1,10 +1,10 @@
 package MODELOS;
 
-import Interfaces.iJSON;
+import Interfaces.IJSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Persona implements iJSON {
+public class Persona implements IJSON {
     protected  String nombre;
     protected String apellido;
     protected String gmail;

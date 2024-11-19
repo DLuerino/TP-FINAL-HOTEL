@@ -1,6 +1,10 @@
 package MODELOS;
 
-public class Persona {
+import Interfaces.metodoJson;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Persona implements metodoJson {
     protected  String nombre;
     protected String apellido;
     protected String gmail;
@@ -47,6 +51,34 @@ public class Persona {
                 ", apellido='" + apellido + '\'' +
                 ", gmail='" + gmail + '\'' ;
     }
+
     /// -------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("nombre", this.nombre);
+            j.put("apellido", this.apellido);
+            j.put("correoElectronico", this.gmail);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return j;
+    }
+
+    public static Persona JsonAObj(JSONObject o) {
+        Persona persona = null;
+        try {
+            String nombre = o.getString("nombre");
+            String apellido = o.getString("apellido");
+            String correoElectronico = o.getString("correoElectronico");
+
+            persona = new Persona(nombre, apellido, correoElectronico);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return persona;
+    }
 
 }

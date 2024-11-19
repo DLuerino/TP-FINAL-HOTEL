@@ -1,11 +1,14 @@
 package MODELOS;
 
 import Excepciones.ErrorAlIngresarException;
+import Interfaces.metodoJson;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class Recepcionista extends Persona{
+public class Recepcionista extends Persona implements metodoJson {
 
     private int id;
     private String contraseña;
@@ -59,4 +62,35 @@ public class Recepcionista extends Persona{
         }
     }
 
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        JSONObject j = super.ObjAJson(); // Llama al método de la clase base Persona
+        try {
+            j.put("id", this.id);
+            j.put("contraseña", this.contraseña); // Nota: Considera la seguridad al manejar contraseñas.
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return j;
+    }
+
+    public static Recepcionista JsonAObj(JSONObject o) {
+        Recepcionista recepcionista = null;
+        try {
+            // Obtener datos heredados
+            Persona persona = Persona.JsonAObj(o);
+
+            // Obtener atributos específicos
+            int id = o.getInt("id");
+            String contraseña = o.getString("contraseña");
+
+            // Crear el objeto Recepcionista
+            recepcionista = new Recepcionista(persona.getNombre(), persona.getApellido(), persona.getGmail(), id, contraseña);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return recepcionista;
+    }
 }

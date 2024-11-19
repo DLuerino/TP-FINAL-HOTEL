@@ -1,11 +1,15 @@
 package Clientes;
 
 import Excepciones.ErrorAlIngresarException;
+import Interfaces.metodoJson;
 import MODELOS.Persona;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Cliente extends Persona {
+public class Cliente extends Persona implements metodoJson {
     private String nacionalidad;
     private Domicilio domicilio;
     private String dni;
@@ -74,4 +78,47 @@ public class Cliente extends Persona {
         }
     }
 
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        JSONObject j = super.ObjAJson(); // Llama al método ObjAJson de Persona
+        try {
+            j.put("nacionalidad", this.nacionalidad);
+            if (this.domicilio != null) {
+                j.put("domicilio", this.domicilio.ObjAJson());
+            } else {
+                j.put("domicilio", JSONObject.NULL);
+            }
+            j.put("dni", this.dni);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return j;
+    }
+
+    public static Cliente JsonAObj(JSONObject o) {
+        Cliente cliente = null;
+        try {
+            // Usar el método JsonAObj de Persona para atributos base
+            Persona persona = Persona.JsonAObj(o);
+
+            // Obtener atributos específicos de Cliente
+            String nacionalidad = o.getString("nacionalidad");
+            String dni = o.getString("dni");
+
+            // Convertir el domicilio si existe
+            Domicilio domicilio = null;
+            if (!o.isNull("domicilio")) {
+                JSONObject domicilioJson = o.getJSONObject("domicilio");
+                domicilio = Domicilio.JsonAObj(domicilioJson);
+            }
+
+            // Crear el objeto Cliente con datos de Persona y atributos adicionales
+            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), nacionalidad, domicilio, dni);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return cliente;
+    }
 }

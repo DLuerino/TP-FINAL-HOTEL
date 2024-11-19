@@ -1,6 +1,10 @@
 package Clientes;
 
-public class Domicilio {
+import Interfaces.metodoJson;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+public class Domicilio implements metodoJson {
     private String calle;
     private int numCalle;
     private boolean departamento;
@@ -38,6 +42,34 @@ public class Domicilio {
     public void setDepartamente(boolean departamente) {
         this.departamento = departamento;
     }
+
     /// -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        JSONObject j = new JSONObject();
+        try {
+            j.put("calle", this.calle);
+            j.put("numCalle", this.numCalle);
+            j.put("departamento", this.departamento);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return j;
+    }
+
+    public static Domicilio JsonAObj(JSONObject o) {
+        Domicilio domicilio = null;
+        try {
+            String calle = o.getString("calle");
+            int numCalle = o.getInt("numCalle");
+            boolean departamento = o.getBoolean("departamento");
+
+            domicilio = new Domicilio(calle, numCalle, departamento);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        return domicilio;
+    }
 
 }

@@ -3,12 +3,14 @@ package Reserva;
 import Clientes.Cliente;
 import Excepciones.ErrorAlIngresarException;
 import Excepciones.ErrorFechaException;
+import Interfaces.metodoJson;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Reserva {
+public class Reserva implements metodoJson {
 
     private int id;
     private String dniCliente;
@@ -136,6 +138,12 @@ public class Reserva {
         }
     }
 
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        return null;
+    }
 
 
 

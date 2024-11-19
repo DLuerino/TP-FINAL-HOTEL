@@ -2,12 +2,14 @@ package Reserva;
 
 import Enums.EstadoHabitacion;
 import Excepciones.ReservaYaRegistradaException;
+import Interfaces.metodoJson;
+import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 
-public class Habitacion {
+public class Habitacion implements metodoJson {
 
     private int numeroHabitacion;
     private EstadoHabitacion estado;
@@ -70,5 +72,14 @@ public class Habitacion {
         }
         return true; // No hay solapamientos, está disponible
     }
+
+    /// -----------------------------------------------------------------------------------------------------------------
+
+    @Override
+    public JSONObject ObjAJson() {
+        return null;
+    }
+
+
 
 }

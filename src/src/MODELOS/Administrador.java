@@ -1,10 +1,10 @@
 package MODELOS;
 
-import Interfaces.metodoJson;
+import Interfaces.iJSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Administrador implements metodoJson {
+public class Administrador implements iJSON {
     private int id;
     private String nombre;
     private String contraseña;

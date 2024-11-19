@@ -1,16 +1,15 @@
 package Reserva;
 
-import Clientes.Cliente;
 import Excepciones.ErrorAlIngresarException;
 import Excepciones.ErrorFechaException;
-import Interfaces.metodoJson;
+import Interfaces.iJSON;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.HashSet;
 import java.util.Random;
 
-public class Reserva implements metodoJson {
+public class Reserva implements iJSON {
 
     private int id;
     private String dniCliente;

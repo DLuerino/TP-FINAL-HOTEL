@@ -2,7 +2,7 @@ package Interfaces;
 
 import org.json.JSONObject;
 
-public interface metodoJson {
+public interface iJSON {
 
     public JSONObject ObjAJson();
 }

@@ -2,14 +2,13 @@ package Reserva;
 
 import Enums.EstadoHabitacion;
 import Excepciones.ReservaYaRegistradaException;
-import Interfaces.metodoJson;
+import Interfaces.iJSON;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 
-public class Habitacion implements metodoJson {
+public class Habitacion implements iJSON {
 
     private int numeroHabitacion;
     private EstadoHabitacion estado;

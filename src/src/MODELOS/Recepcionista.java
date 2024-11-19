@@ -1,14 +1,14 @@
 package MODELOS;
 
 import Excepciones.ErrorAlIngresarException;
-import Interfaces.metodoJson;
+import Interfaces.iJSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 import java.util.Random;
 
-public class Recepcionista extends Persona implements metodoJson {
+public class Recepcionista extends Persona implements iJSON {
 
     private int id;
     private String contraseña;

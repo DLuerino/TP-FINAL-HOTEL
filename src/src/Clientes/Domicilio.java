@@ -1,10 +1,10 @@
 package Clientes;
 
-import Interfaces.metodoJson;
+import Interfaces.iJSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class Domicilio implements metodoJson {
+public class Domicilio implements iJSON {
     private String calle;
     private int numCalle;
     private boolean departamento;

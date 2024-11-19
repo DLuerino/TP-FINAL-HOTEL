@@ -91,6 +91,7 @@ public class Cliente extends Persona implements metodoJson {
                 j.put("domicilio", JSONObject.NULL);
             }
             j.put("dni", this.dni);
+            j.put("usuario", this.tipo)
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -106,6 +107,7 @@ public class Cliente extends Persona implements metodoJson {
             // Obtener atributos específicos de Cliente
             String nacionalidad = o.getString("nacionalidad");
             String dni = o.getString("dni");
+            String tipoUsuario=o.getString("usuario");
 
             // Convertir el domicilio si existe
             Domicilio domicilio = null;
@@ -115,7 +117,7 @@ public class Cliente extends Persona implements metodoJson {
             }
 
             // Crear el objeto Cliente con datos de Persona y atributos adicionales
-            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), nacionalidad, domicilio, dni);
+            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), tipoUsuario, nacionalidad, domicilio, dni);
         } catch (JSONException e) {
             e.printStackTrace();
         }

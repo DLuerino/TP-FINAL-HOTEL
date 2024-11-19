@@ -1,6 +1,7 @@
 package MODELOS;
 
 import Excepciones.ErrorAlIngresarException;
+import Excepciones.IdNegativaException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -8,6 +9,7 @@ import java.util.Objects;
 import java.util.Random;
 
 public class Recepcionista extends Persona {
+
 
     private int id;
     private String contraseña;
@@ -58,6 +60,10 @@ public class Recepcionista extends Persona {
     public void verificarRecepcionista() throws ErrorAlIngresarException {
         if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.contraseña.isEmpty() || this.gmail.isEmpty()){
             throw new ErrorAlIngresarException("\n Complete el espacio vacio. ");
+        }
+        if(this.id<0)
+        {
+            throw new IdNegativaException("La id ingresada no puede ser negativa");
         }
     }
 

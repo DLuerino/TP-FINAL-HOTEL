@@ -93,9 +93,9 @@ public class Menu {
         {
             try{
                 String contraseña = "utntpfinal";
-                gestionAdministrador.agregarObjeto(new Administrador(1,"Facundo",contraseña));
-                gestionAdministrador.agregarObjeto(new Administrador(2,"Diego",contraseña));
-                gestionAdministrador.agregarObjeto(new Administrador(3,"Marco",contraseña));
+                gestionAdministrador.agregarObjeto(new Administrador(-1,"Facundo",contraseña));
+                gestionAdministrador.agregarObjeto(new Administrador(-2,"Diego",contraseña));
+                gestionAdministrador.agregarObjeto(new Administrador(-3,"Marco",contraseña));
             }catch (ObjetoYaRegistradoException e)
             {
                 System.out.println("Ocurrio un error debido a que: " + e.getMessage());
@@ -151,8 +151,6 @@ public class Menu {
 
 
         ///
-
-
 
 
 

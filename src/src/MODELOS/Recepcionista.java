@@ -84,11 +84,8 @@ public class Recepcionista extends Persona {
     public static Recepcionista fromJSON(JSONObject o) {
         Recepcionista recepcionista = new Recepcionista();
         try {
-
-
             int id = o.getInt("id");
             String contraseña = o.getString("contraseña");
-
             // Crear el objeto Recepcionista
         } catch (JSONException e) {
             e.printStackTrace();

@@ -225,7 +225,7 @@ public class GestionReserva implements IJSON {
             return json;
     }
 
-    public GestionReserva fromJSON(JSONObject obj){
+    public static GestionReserva fromJSON(JSONObject obj){
         GestionReserva gestion = new GestionReserva();
 
         try{

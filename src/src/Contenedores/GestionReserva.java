@@ -52,7 +52,7 @@ public class GestionReserva {
 
         /// metodo para actualizar el estado de las habitaciones
 
-    public void actualizarEstadoHabitaciones(){
+    public void realizarCheckOuts(){
         LocalDate hoy = LocalDate.now();
 
         for(Habitacion habitacion : listaHabitaciones){
@@ -71,6 +71,25 @@ public class GestionReserva {
                 habitacion.setEstado(EstadoHabitacion.DISPONIBLE);
             }
         }
+    }
+
+    public void realizarCheckIns()
+    {
+        LocalDate hoy = LocalDate.now();
+        for(Habitacion habitacion : listaHabitaciones)
+        {
+            Iterator<Reserva> recorredor = habitacion.getListaReservas().iterator();
+
+            while (recorredor.hasNext())
+            {
+                Reserva actual = recorredor.next();
+                if(actual.getCheckIn().isEqual(hoy))
+                {
+                    habitacion.setEstado(EstadoHabitacion.OCUPADA);
+                }
+            }
+        }
+
     }
 
 

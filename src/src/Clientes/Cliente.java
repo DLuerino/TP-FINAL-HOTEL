@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Cliente extends Persona implements metodoJson {
+public class Cliente extends Persona {
     private String nacionalidad;
     private Domicilio domicilio;
     private String dni;
@@ -94,24 +94,14 @@ public class Cliente extends Persona implements metodoJson {
     }
 
     public static Cliente JsonAObj(JSONObject o) {
-        Cliente cliente = null;
+        Cliente cliente = new Cliente();
         try {
-            /// Usar el método JsonAObj de Persona para atributos base
-            Persona persona = Persona.JsonAObj(o);
-
-            /// Obtener atributos específicos de Cliente
-            String nacionalidad = o.getString("nacionalidad");
-            String dni = o.getString("dni");
-
-            /// Convertir el domicilio si existe
-            Domicilio domicilio = null;
-            if (!o.isNull("domicilio")) {
-                JSONObject domicilioJson = o.getJSONObject("domicilio");
-                domicilio = Domicilio.JsonAObj(domicilioJson);
-            }
-
-            // Crear el objeto Cliente con datos de Persona y atributos adicionales
-            cliente = new Cliente(persona.getNombre(), persona.getApellido(), persona.getGmail(), nacionalidad, domicilio, dni);
+            cliente.setNombre(o.getString("nombre"));
+            cliente.setApellido(o.getString("apellido"));
+            cliente.setGmail(o.getString("correoElectronico"));
+            cliente.setDni(o.getString("dni"));
+            cliente.setDomicilio(Domicilio.JsonAObj(o.getJSONObject("domicilio")));
+            cliente.setNacionalidad("nacionalidad");
         } catch (JSONException e) {
             e.printStackTrace();
         }

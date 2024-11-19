@@ -8,7 +8,7 @@ import org.json.JSONObject;
 import java.util.Objects;
 import java.util.Random;
 
-public class Recepcionista extends Persona implements metodoJson {
+public class Recepcionista extends Persona  {
 
     private int id;
     private String contraseña;
@@ -28,6 +28,14 @@ public class Recepcionista extends Persona implements metodoJson {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getContraseña() {
+        return contraseña;
+    }
+
+    public void setContraseña(String contraseña) {
+        this.contraseña = contraseña;
     }
 
     @Override
@@ -77,17 +85,13 @@ public class Recepcionista extends Persona implements metodoJson {
     }
 
     public static Recepcionista JsonAObj(JSONObject o) {
-        Recepcionista recepcionista = null;
+        Recepcionista recepcionista = new Recepcionista();
         try {
-            // Obtener datos heredados
-            Persona persona = Persona.JsonAObj(o);
-
-            // Obtener atributos específicos
-            int id = o.getInt("id");
-            String contraseña = o.getString("contraseña");
-
-            // Crear el objeto Recepcionista
-            recepcionista = new Recepcionista(persona.getNombre(), persona.getApellido(), persona.getGmail(), id, contraseña);
+            recepcionista.setNombre(o.getString("nombre"));
+            recepcionista.setApellido(o.getString("apellido"));
+            recepcionista.setGmail(o.getString("correoElectronico"));
+            recepcionista.setId(o.getInt("id"));
+            recepcionista.setContraseña(o.getString("contraseña"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

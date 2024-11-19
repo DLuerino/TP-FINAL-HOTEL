@@ -1,5 +1,6 @@
 package Contenedores;
 import Enums.EstadoHabitacion;
+import Excepciones.DniDeClienteNoRegistrado;
 import Reserva.Reserva;
 import Reserva.Habitacion;
 import java.time.LocalDate;
@@ -27,7 +28,25 @@ public class GestionReserva {
          listaHabitaciones.add(new Habitacion(i,EstadoHabitacion.DISPONIBLE));
      }
     }
-
+    /// -----------------------------------------*-----------------------------------------
+    /// METODO CONFIRMAR LA RESERVA
+    public void confirmarReserva(Reserva reservita) throws DniDeClienteNoRegistrado
+    {
+        if(!listaReservas.containsKey(reservita.getDniCliente()))
+        {
+            throw new DniDeClienteNoRegistrado("El dni ingresado no pertenece a ningun cliente de nuestro sistema...");
+        }
+        listaReservas.get(reservita.getDniCliente()).add(reservita);
+        ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
+        while (recorredor.hasNext())
+        {
+         Habitacion actual = recorredor.next();
+         if(actual.getNumeroHabitacion()==reservita.getNumeroHabitacionReservada())
+             {
+                 actual.agregarReserva(reservita);
+             }
+        }
+    }
     /// -----------------------------------------*-----------------------------------------
         /// metodo buscar habitaciones disponibles
 
@@ -54,9 +73,10 @@ public class GestionReserva {
 
             while(iterator.hasNext()){
                 Reserva reserva =iterator.next();
-                if(reserva.getCheckOut().isBefore(hoy)){
+                if(reserva.getCheckOut().isBefore(hoy)||reserva.getCheckOut().isEqual(hoy)){
                     /// es decir, la reserva ya termino
                     iterator.remove();///por lo tanto la elimina
+                     habitacion.setEstado(EstadoHabitacion.DISPONIBLE);
                 }
             }
 

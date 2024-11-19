@@ -61,7 +61,7 @@ public class Habitacion {
         }
     }
     /// ---------------------------------------------------------------------------------------------------------------
-    public boolean estaDisponible(LocalDate checkIn, LocalDate checkOut) {
+    public Boolean estaDisponible(LocalDate checkIn, LocalDate checkOut) {
         for (Reserva reserva : listaReservas) {
             // Verificar solapamiento
             if (!(checkOut.isBefore(reserva.getCheckIn()) || checkIn.isAfter(reserva.getCheckOut()))) {

@@ -2,6 +2,7 @@ import Clientes.Cliente;
 import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
 import Enums.EstadoHabitacion;
+import MENU.Menu;
 import Reserva.Reserva;
 import Reserva.Habitacion;
 
@@ -13,7 +14,7 @@ public class Main {
     public static void main(String[] args) {
         System.out.println("Hello world!");
 
-        Reserva reserva=new Reserva();
+       /* Reserva reserva=new Reserva();
 
         Cliente cliente1 = new Cliente();
         Cliente cliente2 = new Cliente();
@@ -39,7 +40,10 @@ public class Main {
 
         GestionReserva gestionReserva1 = new GestionReserva();
         gestionReserva1.inciicalizarLasHabitaciones();
-        System.out.println(gestionReserva1.mostrarHabitaciones());
+        System.out.println(gestionReserva1.mostrarHabitaciones()); */
+
+        Menu menu = new Menu();
+        menu.ejecutarMenu();
 
     }
 }

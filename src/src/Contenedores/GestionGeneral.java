@@ -5,6 +5,7 @@ import Excepciones.ObjetoYaRegistradoException;
 import com.sun.jdi.ObjectCollectedException;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class GestionGeneral<T> {
     private HashSet<T> listaRegistros;
@@ -51,7 +52,7 @@ public class GestionGeneral<T> {
 
     /// BUSCAR
 
-    public Boolean buscarObjeto(T objeto)
+    public Boolean buscarObjetoBoolean(T objeto)
     {
         Boolean retorno = false;
         if(!listaRegistros.contains(objeto))
@@ -59,6 +60,21 @@ public class GestionGeneral<T> {
          retorno = true;
         }
         return retorno;
+    }
+
+    public T buscarObjetoYretornarlo(T objeto)
+    {
+        Iterator<T> recorredor = listaRegistros.iterator();
+        while (recorredor.hasNext())
+        {
+            T actual = recorredor.next();
+            if(actual.equals(objeto))
+            {
+             /// quiere decir que encontro ese objeto
+            return actual;
+            }
+        }
+        return null;
     }
 
     /// ------------------------------------------------------------------------------------------------------------

@@ -24,6 +24,11 @@ public class Empleado extends Persona{
         this.id = ultimoId++;
     }
 
+    public Empleado(int id)
+    {
+        this.id = id;
+    }
+
     /// ---------------------------------------------------------------------------------------------------------------
 
     public int getId() {
@@ -94,7 +99,9 @@ public class Empleado extends Persona{
     public static Empleado fromJSON(JSONObject o) {
         Empleado empleado = new Empleado();
         try {
-
+            empleado.setNombre(o.getString("nombre"));
+            empleado.setApellido(o.getString("apellido"));
+            empleado.setGmail(o.getString("correoElectronico"));
             empleado.setId(o.getInt("id"));
             empleado.setContraseña(o.getString("contraseña"));
             empleado.setRol(TipoEmpleado.valueOf(o.getString("rol")));

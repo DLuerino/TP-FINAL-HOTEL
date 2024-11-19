@@ -3,10 +3,12 @@ package MENU;
 import Clientes.Cliente;
 import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
+import Enums.TipoEmpleado;
+import Excepciones.ContraseñaIncorrectaException;
+import Excepciones.ObjetoNoRegistradoException;
 import Excepciones.ObjetoYaRegistradoException;
 import JSONUtiles.JSONUtiles;
-import MODELOS.Administrador;
-import MODELOS.Recepcionista;
+import MODELOS.Empleado;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -33,21 +35,19 @@ public class Menu {
         int opcion;
         /// GESTIONES QUE UTILIZAREMOS
         GestionGeneral<Cliente> gestionClientes = new GestionGeneral<>();
-        GestionGeneral<Recepcionista> gestionRecepcionistas = new GestionGeneral<>();
-        GestionGeneral<Administrador> gestionAdministrador = new GestionGeneral<>();
+        GestionGeneral<Empleado> gestionEmpleados = new GestionGeneral<>();
         GestionReserva gestionReservas = new GestionReserva();
 
         /// STRINGS PARA LOS ARCHIVOS
         String clientesNombreArchivo = "Clientes.json";
-        String recepcionistasNombreArchivo = "Recepcionista.json";
         String reservasNombreArchivo = "Reservas.json";
-        String administradoresNombreArchivo = "Administradores.josn";
+        String empleadosNombreArchivo = "Empleados.json";
 
         /// ARCHIVOS QUE UTILIZAREMOS
         File fileClientes = new File(clientesNombreArchivo);
-        File fileRecepcionistas = new File(recepcionistasNombreArchivo);
         File fileReservas = new File(reservasNombreArchivo);
-        File fileAdministradores = new File(administradoresNombreArchivo);
+        File fileEmpleados = new File(empleadosNombreArchivo);
+
 
         /// VERIFICACIONES PARA SABER SI LOS ARCHIVOS EXISTEN O NO (SI NO EXISTEN LOS CREAMOS E INICIALIZAMOS LOS DATOS NECESARIOS PARA EL SISTEMA)
 
@@ -73,42 +73,29 @@ public class Menu {
             }
         }
 
-        /// ARCHIVO RECEPCIONISTAS
-        if (!fileRecepcionistas.exists()) {
-            JSONObject objetoRegistroRecepcionista = new JSONObject();
-            JSONArray arrayListaRecepcionista = new JSONArray();
-            for (Recepcionista recep : gestionRecepcionistas.getListaRegistros()) {
-                arrayListaRecepcionista.put(recep.toJSON());
-            }
-            try {
-                objetoRegistroRecepcionista.put("listaRecepcionistas", arrayListaRecepcionista);
-                JSONUtiles.grabar(new JSONArray().put(objetoRegistroRecepcionista), recepcionistasNombreArchivo);
-            } catch (JSONException e) {
-                e.printStackTrace();
-            }
-        }
-
-        /// ARCHIVO ADMINISTRADOR
-        if(!fileAdministradores.exists())
+        /// ARCHIVO EMPLEADOS
+        if(!fileEmpleados.exists())
         {
+
             try{
-                String contraseña = "utntpfinal";
-                gestionAdministrador.agregarObjeto(new Administrador(-1,"Facundo",contraseña));
-                gestionAdministrador.agregarObjeto(new Administrador(-2,"Diego",contraseña));
-                gestionAdministrador.agregarObjeto(new Administrador(-3,"Marco",contraseña));
+                gestionEmpleados.agregarObjeto(new Empleado("Facundo","Galeano","galeanofacundo752@gmail.com","utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleados.agregarObjeto(new Empleado("Diego","Luerino","lueriodiego@gmail.com","utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleados.agregarObjeto(new Empleado("Marco","Olivero","marcoolivero@gmail.com","utntpfinal", TipoEmpleado.ADMINISTRADOR));
             }catch (ObjetoYaRegistradoException e)
             {
-                System.out.println("Ocurrio un error debido a que: " + e.getMessage());
+                e.printStackTrace();
             }
-            JSONObject objetoRegistroAdmins = new JSONObject();
-            JSONArray arratListaAdministradores = new JSONArray();
-            for(Administrador admin : gestionAdministrador.getListaRegistros())
+
+
+            JSONObject objetoRegistroEmpleados = new JSONObject();
+            JSONArray arrayListaEmpleados = new JSONArray();
+            for(Empleado empleado : gestionEmpleados.getListaRegistros())
             {
-                arratListaAdministradores.put(admin.toJSON());
+                arrayListaEmpleados.put(empleado.toJSON());
             }
             try{
-                objetoRegistroAdmins.put("listaAdministradores",arratListaAdministradores);
-                JSONUtiles.grabar(new JSONArray().put(objetoRegistroAdmins),administradoresNombreArchivo);
+                objetoRegistroEmpleados.put("listaEmpleados",arrayListaEmpleados);
+                JSONUtiles.grabar(new JSONArray().put(objetoRegistroEmpleados),empleadosNombreArchivo);
             }catch (JSONException e)
             {
                 e.printStackTrace();
@@ -130,28 +117,45 @@ public class Menu {
                 gestionClientes.agregarObjeto(Cliente.fromJSON(objetoCliente));
             }
 
-            /// LEEMOS Y GUARDAMOS LA GESTION GENERAL (GENERICA) QUE CONTIENE LOS RECEPCIONISTAS
-            JSONArray auxRecepcionistas = new JSONArray(JSONUtiles.leer(recepcionistasNombreArchivo));
-            for(int r=0;r<auxRecepcionistas.length();r++)
-            {
-                JSONObject objetoRecepcionista = auxRecepcionistas.getJSONObject(r);
-                gestionRecepcionistas.agregarObjeto(Recepcionista.fromJSON(objetoRecepcionista));
-            }
+            /// LEEMOS Y GUARDAMOS LA GESTION GENERAL (GENERICA) QUE CONTIENE EMPLEADOS
+        JSONArray auxEmpleados = new JSONArray(JSONUtiles.leer(empleadosNombreArchivo));
+        for(int e=0;e<auxEmpleados.length();e++)
+        {
+            JSONObject objetoEmpleado = auxEmpleados.getJSONObject(e);
+            gestionEmpleados.agregarObjeto(Empleado.fromJSON(objetoEmpleado));
+        }
 
-            /// Y POR ULTIMO LEEMOS Y GUARDAMOS LA GESTION GENERAL (GENERICA) QUE CONTIENE A LOS ADMINISTRADORES
-            JSONArray auxAdmins = new JSONArray(JSONUtiles.leer(administradoresNombreArchivo));
-            for (int a=0;a<auxAdmins.length();a++)
-            {
-                JSONObject objetoAdmin = auxAdmins.getJSONObject(a);
-                gestionAdministrador.agregarObjeto(Administrador.fromJSON(objetoAdmin));
-            }
         } catch (JSONException e) {
             e.printStackTrace();
         }
 
 
         ///
+        Boolean salirAux = false;
 
+       while(salirAux)
+        System.out.println("Bienvenido al sistema del hotel UTN...");
+        System.out.println("Ingrese su id: ");
+        int idIngresada = sc.nextInt();
+        Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
+    try {
+        if (empleadoAux == null) {
+            throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
+        } else {
+            System.out.println("Bienvenido " + empleadoAux.getNombre() + "!!!!!");
+            System.out.println("Ingrese su contraseña:");
+            String contraseñaAux = sc.next();
+            if (empleadoAux.getContraseña().equals(contraseñaAux)) {
+                System.out.println("Contraseña correcta, redireccionandolo al sistema..");
+                salirAux = true;
+            } else {
+                throw new ContraseñaIncorrectaException("La contraseña ingresada es incorrecta.");
+            }
+        }
+    }catch (ObjetoNoRegistradoException | ContraseñaIncorrectaException e)
+    {
+        e.printStackTrace();
+    }
 
 
 

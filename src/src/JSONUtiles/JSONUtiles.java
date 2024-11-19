@@ -17,8 +17,10 @@ public class JSONUtiles {
             FileWriter file = new FileWriter(archivo);
             file.write(o.toString(4));
             file.close();
-        } catch (IOException | JSONException e) {
+        } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 

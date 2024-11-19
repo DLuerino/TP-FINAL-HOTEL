@@ -58,14 +58,12 @@ public class Domicilio implements IJSON {
         return j;
     }
 
-    public static Domicilio fromJSON(JSONObject o) {
-        Domicilio domicilio = null;
+    public static Domicilio fromJSON(JSONObject obj) {
+        Domicilio domicilio = new Domicilio();
         try {
-            String calle = o.getString("calle");
-            int numCalle = o.getInt("numCalle");
-            boolean departamento = o.getBoolean("departamento");
-
-            domicilio = new Domicilio(calle, numCalle, departamento);
+            domicilio.setCalle(obj.getString("calle"));
+            domicilio.setNumCalle(obj.getInt("numCalle"));
+            domicilio.setDepartamente(obj.getBoolean("departamento"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

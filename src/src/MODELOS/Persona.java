@@ -55,7 +55,7 @@ public class Persona implements IJSON {
     /// -------------------------------------------------------------------------------------------------------------
 
     @Override
-    public JSONObject ObjAJson() {
+    public JSONObject toJSON() {
         JSONObject j = new JSONObject();
         try {
             j.put("nombre", this.nombre);

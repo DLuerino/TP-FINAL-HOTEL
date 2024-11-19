@@ -79,11 +79,11 @@ public class Cliente extends Persona{
     /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
-    public JSONObject ObjAJson() {
-        JSONObject j = super.ObjAJson(); /// Llama al método ObjAJson de Persona
+    public JSONObject toJSON() {
+        JSONObject j = super.toJSON(); /// Llama al método ObjAJson de Persona
         try {
             j.put("nacionalidad", this.nacionalidad);
-            j.put("domicilio", this.domicilio.ObjAJson());
+            j.put("domicilio", this.domicilio.toJSON());
             j.put("dni", this.dni);
         } catch (JSONException e) {
             e.printStackTrace();

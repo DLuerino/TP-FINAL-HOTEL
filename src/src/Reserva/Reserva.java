@@ -139,10 +139,6 @@ public class Reserva implements IJSON {
 
     /// -----------------------------------------------------------------------------------------------------------------
 
-    @Override
-    public JSONObject ObjAJson() {
-        return null;
-    }
 
 
 

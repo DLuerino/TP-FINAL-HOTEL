@@ -74,11 +74,6 @@ public class Habitacion implements IJSON {
 
     /// -----------------------------------------------------------------------------------------------------------------
 
-    @Override
-    public JSONObject ObjAJson() {
-        return null;
-    }
-
 
 
 }

@@ -46,7 +46,7 @@ public class Administrador implements IJSON {
     /// -----------------------------------------*-----------------------------------------
 
     @Override
-    public JSONObject ObjAJson() {
+    public JSONObject toJSON() {
         JSONObject j = new JSONObject();
         try {
             // Agregar los atributos de la clase Administrador al JSON

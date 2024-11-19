@@ -46,7 +46,7 @@ public class Domicilio implements IJSON {
     /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
-    public JSONObject ObjAJson() {
+    public JSONObject toJSON() {
         JSONObject j = new JSONObject();
         try {
             j.put("calle", this.calle);

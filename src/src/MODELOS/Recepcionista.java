@@ -64,8 +64,8 @@ public class Recepcionista extends Persona {
     /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
-    public JSONObject ObjAJson() {
-        JSONObject j = super.ObjAJson(); // Llama al método de la clase base Persona
+    public JSONObject toJSON() {
+        JSONObject j = super.toJSON(); // Llama al método de la clase base Persona
         try {
             j.put("id", this.id);
             j.put("contraseña", this.contraseña); // Nota: Considera la seguridad al manejar contraseñas.

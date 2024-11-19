@@ -8,10 +8,12 @@ import java.util.Random;
 public class Recepcionista extends Persona{
 
     private int id;
+    private String contraseña;
 
-    public Recepcionista(String nombre, String apellido, String gmail, String contraseña, int id) {
-        super(nombre, apellido, gmail, contraseña);
-        this.id = generarId();
+    public Recepcionista(String nombre, String apellido, String gmail, int id, String contraseña) {
+        super(nombre, apellido, gmail);
+        this.id = id;
+        this.contraseña = contraseña;
     }
 
     public Recepcionista() {
@@ -40,8 +42,9 @@ public class Recepcionista extends Persona{
 
     @Override
     public String toString() {
-        return "Recepcionista{" +super.toString()+
+        return "Recepcionista{"+ super.toString() +
                 "id=" + id +
+                ", contraseña='" + contraseña + '\'' +
                 '}';
     }
 

@@ -10,8 +10,8 @@ public class Cliente extends Persona {
     private Domicilio domicilio;
     private String dni;
 
-    public Cliente(String nombre, String apellido, String gmail, String contraseña, String tipoUsuario, String nacionalidad, Domicilio domicilio, String dni) {
-        super(nombre, apellido, gmail, contraseña);
+    public Cliente(String nombre, String apellido, String gmail, String tipoUsuario, String nacionalidad, Domicilio domicilio, String dni) {
+        super(nombre, apellido, gmail);
         this.nacionalidad = nacionalidad;
         this.domicilio = domicilio;
         this.dni = dni;
@@ -69,7 +69,7 @@ public class Cliente extends Persona {
 
     public void verificarCliente() throws ErrorAlIngresarException {
 
-        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.nacionalidad.isEmpty() || this.dni.isEmpty() || this.contraseña.isEmpty() || this.gmail.isEmpty()){
+        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.nacionalidad.isEmpty() || this.dni.isEmpty()  || this.gmail.isEmpty()){
             throw new ErrorAlIngresarException("\n Complete el espacio vacio. ");
         }
     }

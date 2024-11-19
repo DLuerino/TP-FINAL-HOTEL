@@ -54,9 +54,10 @@ public class GestionReserva {
 
             while(iterator.hasNext()){
                 Reserva reserva =iterator.next();
-                if(reserva.getCheckOut().isBefore(hoy)){
+                if(reserva.getCheckOut().isBefore(hoy)||reserva.getCheckOut().isEqual(hoy)){
                     /// es decir, la reserva ya termino
                     iterator.remove();///por lo tanto la elimina
+                     habitacion.setEstado(EstadoHabitacion.DISPONIBLE);
                 }
             }
 

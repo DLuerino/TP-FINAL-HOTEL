@@ -1,14 +1,15 @@
 package Clientes;
 
 import Excepciones.ErrorAlIngresarException;
-import Interfaces.iJSON;
+import Interfaces.metodoJson;
 import MODELOS.Persona;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.Objects;
 
-public class Cliente extends Persona implements iJSON {
+public class Cliente extends Persona implements metodoJson {
     private String nacionalidad;
     private Domicilio domicilio;
     private String dni;

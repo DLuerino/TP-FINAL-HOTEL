@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Habitacion implements IJSON {
 
@@ -49,7 +50,19 @@ public class Habitacion implements IJSON {
         return listaReservas;
     }
 
+
     /// -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Habitacion that)) return false;
+        return getNumeroHabitacion() == that.getNumeroHabitacion();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getNumeroHabitacion());
+    }
+
     @Override
     public String toString() {
         return "Habitacion{" +

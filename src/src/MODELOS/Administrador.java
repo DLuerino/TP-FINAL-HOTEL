@@ -4,6 +4,8 @@ import Interfaces.IJSON;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Objects;
+
 public class Administrador implements IJSON {
     private int id;
     private String nombre;
@@ -44,6 +46,27 @@ public class Administrador implements IJSON {
 
     public void setContraseña(String contraseña) {
         this.contraseña = contraseña;
+    }
+
+    /// -----------------------------------------*-----------------------------------------
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Administrador that)) return false;
+        return getId() == that.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
+    @Override
+    public String toString() {
+        return "Administrador{" +
+                "id=" + id +
+                ", nombre='" + nombre + '\'' +
+                ", contraseña='" + contraseña + '\'' +
+                '}';
     }
 
     /// -----------------------------------------*-----------------------------------------

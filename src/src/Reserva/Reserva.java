@@ -8,6 +8,7 @@ import org.json.JSONObject;
 
 import java.time.LocalDate;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Random;
 
 public class Reserva implements IJSON {
@@ -99,7 +100,20 @@ public class Reserva implements IJSON {
         this.numeroHabitacionReservada = numeroHabitacionReservada;
     }
 
+
     /// -----------------------------------------*-----------------------------------------
+
+    @Override
+    public boolean equals(Object o) {
+        if (!(o instanceof Reserva reserva)) return false;
+        return getId() == reserva.getId();
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hashCode(getId());
+    }
+
 
     @Override
     public String toString() {

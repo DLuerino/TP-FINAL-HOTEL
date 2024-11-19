@@ -91,11 +91,11 @@ public class Cliente extends Persona{
         return j;
     }
 
-    public static Cliente JsonAObj(JSONObject o) {
+    public static Cliente fromJSON(JSONObject o) {
         Cliente cliente = null;
         try {
             /// Usar el método JsonAObj de Persona para atributos base
-            Persona persona = Persona.JsonAObj(o);
+            Persona persona = Persona.fromJSON(o);
 
             /// Obtener atributos específicos de Cliente
             String nacionalidad = o.getString("nacionalidad");
@@ -105,7 +105,7 @@ public class Cliente extends Persona{
             Domicilio domicilio = null;
             if (!o.isNull("domicilio")) {
                 JSONObject domicilioJson = o.getJSONObject("domicilio");
-                domicilio = Domicilio.JsonAObj(domicilioJson);
+                domicilio = Domicilio.fromJSON(domicilioJson);
             }
 
             // Crear el objeto Cliente con datos de Persona y atributos adicionales

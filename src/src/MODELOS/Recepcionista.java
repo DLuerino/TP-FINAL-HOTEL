@@ -75,11 +75,11 @@ public class Recepcionista extends Persona {
         return j;
     }
 
-    public static Recepcionista JsonAObj(JSONObject o) {
+    public static Recepcionista fromJSON(JSONObject o) {
         Recepcionista recepcionista = null;
         try {
             // Obtener datos heredados
-            Persona persona = Persona.JsonAObj(o);
+            Persona persona = Persona.fromJSON(o);
 
             // Obtener atributos específicos
             int id = o.getInt("id");

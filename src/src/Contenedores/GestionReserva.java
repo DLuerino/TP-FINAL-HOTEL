@@ -5,6 +5,10 @@ import Excepciones.SinDisponibilidadException;
 import Interfaces.IJSON;
 import Reserva.Reserva;
 import Reserva.Habitacion;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.time.LocalDate;
 import java.util.*;
 
@@ -186,5 +190,74 @@ public class GestionReserva implements IJSON {
     }
 
     /// -----------------------------------------*-----------------------------------------
+        /// Metodos para serializar y deserializar
 
+    @Override
+    public JSONObject toJSON() {
+        /// metodo para convertir a JSON
+
+            JSONObject json = new JSONObject();
+
+            try{
+                // Convertir listaReservas
+                JSONObject reservasJson = new JSONObject();
+                for (String key : listaReservas.keySet()) {
+                    JSONArray reservasArray = new JSONArray();
+                    for (Reserva reserva : listaReservas.get(key)) {
+                        reservasArray.put(reserva.toJSON()); // Asumimos que Reserva también tiene toJSONObject
+                    }
+                    reservasJson.put(key, reservasArray);
+                }
+
+                // Convertir listaHabitaciones
+                JSONArray habitacionesArray = new JSONArray();
+                for (Habitacion habitacion : listaHabitaciones) {
+                    habitacionesArray.put(habitacion.toJSON()); // Asumimos que Habitacion tiene toJSONObject
+                }
+
+                /// agrega todo al JSON principal
+                json.put("listaReservas", reservasJson);
+                json.put("listaHabitaciones", habitacionesArray);
+            }catch (JSONException e){
+                e.printStackTrace();
+            }
+
+            return json;
+    }
+
+    public GestionReserva fromJSON(JSONObject obj){
+        GestionReserva gestion = new GestionReserva();
+
+        try{
+            // Reconstruir listaReservas
+            JSONObject reservasJson = obj.getJSONObject("listaReservas");
+            Iterator<String> keys = reservasJson.keys();
+
+            while (keys.hasNext()) {
+                String key = keys.next();
+                JSONArray reservasArray = reservasJson.getJSONArray(key);
+                HashSet<Reserva> reservasSet = new HashSet<>();
+
+                for (int i = 0; i < reservasArray.length(); i++) {
+                    JSONObject reservaJson = reservasArray.getJSONObject(i);
+                    reservasSet.add(Reserva.fromJSON(reservaJson)); // Asumimos que Reserva tiene fromJSONObject
+                }
+
+                gestion.listaReservas.put(key, reservasSet);
+            }
+
+            // Reconstruir listaHabitaciones
+            JSONArray habitacionesArray = obj.getJSONArray("listaHabitaciones");
+
+            for (int i = 0; i < habitacionesArray.length(); i++) {
+                JSONObject habitacionJson = habitacionesArray.getJSONObject(i);
+                gestion.listaHabitaciones.add(Habitacion.fromJSON(habitacionJson)); // Asumimos que Habitacion tiene fromJSONObject
+            }
+
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return gestion;
+    }
 }

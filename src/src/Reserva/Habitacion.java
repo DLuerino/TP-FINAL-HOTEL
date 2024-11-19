@@ -3,6 +3,8 @@ package Reserva;
 import Enums.EstadoHabitacion;
 import Excepciones.ReservaYaRegistradaException;
 import Interfaces.IJSON;
+import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
@@ -19,6 +21,10 @@ public class Habitacion implements IJSON {
         this.numeroHabitacion = numeroHabitacion;
         this.estado = estado;
         this.listaReservas = new ArrayList<>();
+    }
+
+    public Habitacion() {
+        this.listaReservas=new ArrayList<>();
     }
 
     /// -----------------------------------------------------------------------------------------------------------------
@@ -74,6 +80,54 @@ public class Habitacion implements IJSON {
 
     /// -----------------------------------------------------------------------------------------------------------------
 
+    @Override
+    public JSONObject toJSON() {
+        JSONObject obj=new JSONObject();
 
+        try{
+            /// convertir atributos
 
+            obj.put("NumeroDeHabitacion", numeroHabitacion);
+            obj.put("Estado", estado.name());///.name convierte el enum en string
+
+            /// convertir lista de reservas
+            JSONArray reservasArray=new JSONArray();
+
+            for(Reserva reserva : listaReservas){
+                reservasArray.put(reserva.toJSON());
+            }
+
+            obj.put("ListaDeReservas", reservasArray);
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return obj;
+    }
+
+    public static Habitacion fromJSON(JSONObject obj){
+        /// Reconstruir datos
+        Habitacion habitacion=new Habitacion();
+
+        try{
+            habitacion.numeroHabitacion=obj.getInt("NumeroDeHabitacion");
+            habitacion.estado=EstadoHabitacion.valueOf(obj.getString("Estado"));
+
+            ///reconstruir reservas
+            habitacion.listaReservas=new ArrayList<>();
+            JSONArray reservasArray=obj.getJSONArray("ListaDeReservas");
+
+            for(int i=0; i<reservasArray.length(); i++){
+                JSONObject reservaJSON=reservasArray.getJSONObject(i);
+
+                Reserva reserva=new Reserva();///Reserva vacia
+                reserva.fromJSON(reservaJSON);///Reconstruir reserva
+                habitacion.listaReservas.add(reserva);
+            }
+        }catch (JSONException e){
+            e.printStackTrace();
+        }
+
+        return habitacion;
+    }
 }

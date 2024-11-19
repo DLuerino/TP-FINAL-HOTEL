@@ -59,11 +59,11 @@ public class Administrador implements IJSON {
         return j;
     }
 
-    public static Administrador JsonAObj(JSONObject o) {
+    public static Administrador fromJSON(JSONObject o) {
         Administrador administrador = null;
         try {
             // Obtener datos heredados
-            Persona persona = Persona.JsonAObj(o);
+            Persona persona = Persona.fromJSON(o);
 
             // Obtener atributos específicos
             int id = o.getInt("id");

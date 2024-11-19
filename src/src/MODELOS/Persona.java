@@ -67,7 +67,7 @@ public class Persona implements IJSON {
         return j;
     }
 
-    public static Persona JsonAObj(JSONObject o) {
+    public static Persona fromJSON(JSONObject o) {
         Persona persona = null;
         try {
             String nombre = o.getString("nombre");

@@ -58,7 +58,7 @@ public class Domicilio implements IJSON {
         return j;
     }
 
-    public static Domicilio JsonAObj(JSONObject o) {
+    public static Domicilio fromJSON(JSONObject o) {
         Domicilio domicilio = null;
         try {
             String calle = o.getString("calle");

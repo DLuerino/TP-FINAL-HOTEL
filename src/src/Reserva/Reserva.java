@@ -3,6 +3,7 @@ package Reserva;
 import Excepciones.ErrorAlIngresarException;
 import Excepciones.ErrorFechaException;
 import Interfaces.IJSON;
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
@@ -139,7 +140,33 @@ public class Reserva implements IJSON {
 
     /// -----------------------------------------------------------------------------------------------------------------
 
+    /// metodos serializar y deserializar
 
+    @Override
+    public JSONObject toJSON() {
+        JSONObject obj= new JSONObject();
 
+        try{
+            obj.put("Id", id);
+            obj.put("DniCliente", dniCliente);
+            obj.put("CheckIn", checkIn);
+            obj.put("CheckOut", checkOut);
+            obj.put("NumeroHabitacionReservada", numeroHabitacionReservada);
+        }catch(JSONException e){
+            e.printStackTrace();
+        }
 
+        return obj;
+    }
+
+    public static Reserva fromJSON(JSONObject obj){
+        Reserva reserva = new Reserva();
+
+        try{
+            reserva.id=obj.getInt("Id");
+            reserva.dniCliente=obj.getString("Dni");
+            reserva.checkIn=LocalDate.parse(obj.getString("CheckIn"));
+            reserva.checkOut=LocalDate.parse(obj.getString("CheckOut"));
+        }
+    }
 }

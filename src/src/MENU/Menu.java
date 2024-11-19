@@ -142,8 +142,7 @@ public class Menu {
         System.out.println("Bienvenido al sistema del hotel UTN...");
         System.out.println("Ingrese su id: ");
         int idIngresada = sc.nextInt();
-        Empleado empleadoAux = new Empleado();
-        empleadoAux = buscarObjetoEnGestionEmpleados(gestionEmpleados,idIngresada);
+       ///  Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
     try {
         if (empleadoAux == null) {
             throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
@@ -169,19 +168,6 @@ public class Menu {
     }
 
 
-    public Empleado buscarObjetoEnGestionEmpleados(GestionGeneral<Empleado> empleado, int id)
-    {
-        Iterator<Empleado> recorredor = empleado.getListaRegistros().iterator();
-        while (recorredor.hasNext())
-        {
-            Empleado actual = recorredor.next();
-            if(actual.getId()==id)
-            {
-                return actual;
-            }
-        }
-        return null;
-    }
 
 
 

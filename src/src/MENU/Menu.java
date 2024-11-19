@@ -15,6 +15,8 @@ import org.json.JSONObject;
 
 import java.io.File;
 import java.sql.SQLOutput;
+import java.util.HashSet;
+import java.util.Iterator;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -102,7 +104,7 @@ public class Menu {
             }
         }
 
-        /// AHORA REALIZAMOS EL CODIGO QUE LEE LOS ARCHIVOS DEL PROGRAMA Y GUARDA LOS DATOS EN LAS VARIABLES GESTIONES ASI TRABAJAMOS CON ELLAS Y SUS DATOS
+       /// AHORA REALIZAMOS EL CODIGO QUE LEE LOS ARCHIVOS DEL PROGRAMA Y GUARDA LOS DATOS EN LAS VARIABLES GESTIONES ASI TRABAJAMOS CON ELLAS Y SUS DATOS
         /// LEEMOS Y GUARDAMOS LA GESTION RESERVAS
         try {
             /// LEEMOS Y GUARDAMOS LA GESTION RESERVAS
@@ -110,22 +112,25 @@ public class Menu {
             gestionReservas = GestionReserva.fromJSON(auxReservas.getJSONObject(0));
 
             /// AHORA DEBERIAMOS LEER Y GUARDAR LA GESTION GENERAL (GENERICA) QUE CONTIENE LOS CLIENTES
-            JSONArray auxClientes = new JSONArray(JSONUtiles.leer(clientesNombreArchivo));
-            for(int c=0;c<auxClientes.length();c++)
-            {
-                JSONObject objetoCliente = auxClientes.getJSONObject(c);
-                gestionClientes.agregarObjeto(Cliente.fromJSON(objetoCliente));
-            }
+
+            JSONArray jsonArray1 = new JSONArray(JSONUtiles.leer(clientesNombreArchivo));
+            JSONObject registroCliente = jsonArray1.getJSONObject(0); // Primer objeto del JSON
+            JSONArray listaClientes = registroCliente.getJSONArray("listaClientes");
+            for (int c = 0; c < listaClientes.length(); c++) {
+                JSONObject jsonCliente = listaClientes.getJSONObject(c);
+                Cliente cliente = Cliente.fromJSON(jsonCliente); // Deserializa el empleado
+                gestionClientes.agregarObjeto(cliente); // Agrega al gestor
 
             /// LEEMOS Y GUARDAMOS LA GESTION GENERAL (GENERICA) QUE CONTIENE EMPLEADOS
-        JSONArray auxEmpleados = new JSONArray(JSONUtiles.leer(empleadosNombreArchivo));
-        for(int e=0;e<auxEmpleados.length();e++)
-        {
-            JSONObject objetoEmpleado = auxEmpleados.getJSONObject(e);
-            gestionEmpleados.agregarObjeto(Empleado.fromJSON(objetoEmpleado));
-        }
-
-        } catch (JSONException e) {
+                JSONArray jsonArray2 = new JSONArray(JSONUtiles.leer(empleadosNombreArchivo));
+                JSONObject registroEmpleados = jsonArray2.getJSONObject(0); // Primer objeto del JSON
+                JSONArray listaEmpleados = registroEmpleados.getJSONArray("listaEmpleados");
+                     for (int i = 0; i < listaEmpleados.length(); i++) {
+                            JSONObject jsonEmpleado = listaEmpleados.getJSONObject(i);
+                            Empleado empleado = Empleado.fromJSON(jsonEmpleado); // Deserializa el empleado
+                            gestionEmpleados.agregarObjeto(empleado); // Agrega al gestor
+                        }
+        } }catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -137,7 +142,8 @@ public class Menu {
         System.out.println("Bienvenido al sistema del hotel UTN...");
         System.out.println("Ingrese su id: ");
         int idIngresada = sc.nextInt();
-        Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
+        Empleado empleadoAux = new Empleado();
+        empleadoAux = buscarObjetoEnGestionEmpleados(gestionEmpleados,idIngresada);
     try {
         if (empleadoAux == null) {
             throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
@@ -153,7 +159,7 @@ public class Menu {
             }
         }
     }catch (ObjetoNoRegistradoException | ContraseñasNoCoincideException e) {
-        e.printStackTrace();
+        System.out.println("Error debido a que: " + e.getMessage());
     }
 
 
@@ -161,4 +167,23 @@ public class Menu {
 
 
     }
+
+
+    public Empleado buscarObjetoEnGestionEmpleados(GestionGeneral<Empleado> empleado, int id)
+    {
+        Iterator<Empleado> recorredor = empleado.getListaRegistros().iterator();
+        while (recorredor.hasNext())
+        {
+            Empleado actual = recorredor.next();
+            if(actual.getId()==id)
+            {
+                return actual;
+            }
+        }
+        return null;
+    }
+
+
+
+
 }

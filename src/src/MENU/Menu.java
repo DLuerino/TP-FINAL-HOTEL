@@ -152,8 +152,7 @@ public class Menu {
                 throw new ContraseñaIncorrectaException("La contraseña ingresada es incorrecta.");
             }
         }
-    }catch (ObjetoNoRegistradoException | ContraseñaIncorrectaException e)
-    {
+    }catch (ObjetoNoRegistradoException | ContraseñaIncorrectaException e) {
         e.printStackTrace();
     }
 

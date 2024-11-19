@@ -4,7 +4,7 @@ import Clientes.Cliente;
 import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
 import Enums.TipoEmpleado;
-import Excepciones.ContraseñaIncorrectaException;
+import Excepciones.ContraseñasNoCoincideException;
 import Excepciones.ObjetoNoRegistradoException;
 import Excepciones.ObjetoYaRegistradoException;
 import JSONUtiles.JSONUtiles;
@@ -149,10 +149,10 @@ public class Menu {
                 System.out.println("Contraseña correcta, redireccionandolo al sistema..");
                 salirAux = true;
             } else {
-                throw new ContraseñaIncorrectaException("La contraseña ingresada es incorrecta.");
+                throw new ContraseñasNoCoincideException("La contraseña ingresada es incorrecta.");
             }
         }
-    }catch (ObjetoNoRegistradoException | ContraseñaIncorrectaException e) {
+    }catch (ObjetoNoRegistradoException | ContraseñasNoCoincideException e) {
         e.printStackTrace();
     }
 

@@ -24,6 +24,11 @@ public class Empleado extends Persona{
         this.id = ultimoId++;
     }
 
+    public Empleado(int id)
+    {
+        this.id = id;
+    }
+
     /// ---------------------------------------------------------------------------------------------------------------
 
     public int getId() {

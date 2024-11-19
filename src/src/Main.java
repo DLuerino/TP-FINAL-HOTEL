@@ -15,35 +15,7 @@ public class Main {
 
         Reserva reserva=new Reserva();
 
-        System.out.println(reserva.toString());
-
-       /* Reserva res1=new Reserva("12345123", "2024-01-01", "2024-01-05");
-        Reserva res2=new Reserva("89098897", "2024-01-01", "2024-01-05");
-        Reserva res3=new Reserva("87463123", "2024-01-01", "2024-01-05");
-        Reserva res4=new Reserva("87463123", "2024-01-01", "2024-01-05");
-
-        GestionReserva listaReservas=new GestionReserva();
-
-        for(int i=1; i<4; i++){
-            listaReservas.addHabitacion(new Habitacion(i, EstadoHabitacion.DISPONIBLE));
-        }
-
-        listaReservas.addReserva(res1);
-        listaReservas.addReserva(res2);
-        listaReservas.addReserva(res3);
-        listaReservas.addReserva(res4);
-
-        System.out.println(listaReservas.getListaHabitaciones().toString()); */
-
-
-       /* Reserva res5=new Reserva("76321672", "2024-01-06", "2024-01-8");
-        listaReservas.addReserva(res5);
-
-        Reserva res6=new Reserva("76321672", "2024-01-06", "2024-01-8");
-        listaReservas.addReserva(res6);
-        System.out.println(listaReservas.mostrarTodasLasReservas()); */
-
-        /*Cliente cliente1 = new Cliente();
+        Cliente cliente1 = new Cliente();
         Cliente cliente2 = new Cliente();
         Cliente cliente3 = new Cliente();
         cliente1.setDni("1111");
@@ -62,12 +34,12 @@ public class Main {
         gestionReserva.agregarDniDeClienteNuevo(cliente3.getDni());
 
         System.out.println(""+listaClientes.getListaRegistros());
-        System.out.println(""+gestionReserva.mostrarTodasLasReservas()); */
+        System.out.println(""+gestionReserva.mostrarTodasLasReservas());
 
 
-        GestionReserva gestionReserva = new GestionReserva();
-        gestionReserva.inciicalizarLasHabitaciones();
-        System.out.println(gestionReserva.mostrarHabitaciones());
+        GestionReserva gestionReserva1 = new GestionReserva();
+        gestionReserva1.inciicalizarLasHabitaciones();
+        System.out.println(gestionReserva1.mostrarHabitaciones());
 
     }
 }

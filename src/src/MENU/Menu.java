@@ -5,15 +5,11 @@ import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
 import Excepciones.ObjetoYaRegistradoException;
 import JSONUtiles.JSONUtiles;
-import MODELOS.Administrador;
-import MODELOS.Recepcionista;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
-import java.sql.SQLOutput;
-import java.util.Objects;
 import java.util.Scanner;
 
 public class Menu {

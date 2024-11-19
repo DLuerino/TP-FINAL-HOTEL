@@ -66,13 +66,12 @@ public abstract class Persona implements IJSON {
         return j;
     }
 
-    public static Persona fromJSON(JSONObject o) {
+    public static Persona fromJSON(JSONObject obj) {
         Persona persona = null;
         try {
-            String nombre = o.getString("nombre");
-            String apellido = o.getString("apellido");
-            String correoElectronico = o.getString("correoElectronico");
-
+            persona.setNombre(obj.getString("nombre"));
+            persona.setApellido(obj.getString("apellido"));
+            persona.setGmail(obj.getString("correoElectronico"));
         } catch (JSONException e) {
             e.printStackTrace();
         }

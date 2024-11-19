@@ -84,7 +84,7 @@ public class Empleado extends Persona{
         try {
             j.put("id", this.id);
             j.put("contraseña", this.contraseña);
-            j.put("rol", this.rol);
+            j.put("rol", this.rol.name());
         } catch (JSONException e) {
             e.printStackTrace();
         }

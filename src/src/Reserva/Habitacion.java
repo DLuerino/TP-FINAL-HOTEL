@@ -123,8 +123,8 @@ public class Habitacion implements IJSON {
         Habitacion habitacion=new Habitacion();
 
         try{
-            habitacion.numeroHabitacion=obj.getInt("NumeroDeHabitacion");
-            habitacion.estado=EstadoHabitacion.valueOf(obj.getString("Estado"));
+            habitacion.setNumeroHabitacion(obj.getInt("NumeroDeHabitacion"));
+            habitacion.setEstado(EstadoHabitacion.valueOf(obj.getString("Estado")));
 
             ///reconstruir reservas
             habitacion.listaReservas=new ArrayList<>();

@@ -1,6 +1,7 @@
 package JSONUtiles;
 
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONTokener;
 
 import java.io.FileNotFoundException;
@@ -14,10 +15,12 @@ public class JSONUtiles {
 
         try {
             FileWriter file = new FileWriter(archivo);
-            file.write(o.toString());
+            file.write(o.toString(4));
             file.close();
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
         }
     }
 

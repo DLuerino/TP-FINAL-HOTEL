@@ -1,6 +1,7 @@
 package Contenedores;
 import Enums.EstadoHabitacion;
 import Excepciones.DniDeClienteNoRegistrado;
+import Excepciones.SinDisponibilidadException;
 import Reserva.Reserva;
 import Reserva.Habitacion;
 import java.time.LocalDate;
@@ -50,13 +51,18 @@ public class GestionReserva {
     /// -----------------------------------------*-----------------------------------------
         /// metodo buscar habitaciones disponibles
 
-    public ArrayList<Habitacion> obtenerDisponibles(LocalDate checkIn, LocalDate checkOut){
+    public ArrayList<Habitacion> obtenerDisponibles(LocalDate checkIn, LocalDate checkOut) throws SinDisponibilidadException
+    {
         ArrayList<Habitacion> disponibles=new ArrayList<>();
 
         for(Habitacion habitacion : listaHabitaciones){
             if(habitacion.estaDisponible(checkIn, checkOut)){
                 disponibles.add(habitacion);
             }
+        }
+        if(disponibles.isEmpty())
+        {
+            throw new SinDisponibilidadException("No hay habitaciones disponibles para la reserva.");
         }
 
         return disponibles;

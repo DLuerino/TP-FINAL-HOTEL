@@ -120,7 +120,7 @@ public class Menu {
                 JSONObject jsonCliente = listaClientes.getJSONObject(c);
                 Cliente cliente = Cliente.fromJSON(jsonCliente); // Deserializa el empleado
                 gestionClientes.agregarObjeto(cliente); // Agrega al gestor
-
+            }
             /// LEEMOS Y GUARDAMOS LA GESTION GENERAL (GENERICA) QUE CONTIENE EMPLEADOS
                 JSONArray jsonArray2 = new JSONArray(JSONUtiles.leer(empleadosNombreArchivo));
                 JSONObject registroEmpleados = jsonArray2.getJSONObject(0); // Primer objeto del JSON
@@ -130,7 +130,7 @@ public class Menu {
                             Empleado empleado = Empleado.fromJSON(jsonEmpleado); // Deserializa el empleado
                             gestionEmpleados.agregarObjeto(empleado); // Agrega al gestor
                         }
-        } }catch (JSONException e) {
+        }catch (JSONException e) {
             e.printStackTrace();
         }
 
@@ -142,7 +142,7 @@ public class Menu {
         System.out.println("Bienvenido al sistema del hotel UTN...");
         System.out.println("Ingrese su id: ");
         int idIngresada = sc.nextInt();
-       ///  Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
+       Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
     try {
         if (empleadoAux == null) {
             throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
@@ -161,9 +161,21 @@ public class Menu {
         System.out.println("Error debido a que: " + e.getMessage());
     }
 
+    if(empleadoAux.getRol().equals(TipoEmpleado.ADMINISTRADOR)){
+        boolean salir=false;
 
+        while(!salir){
+            System.out.println("Bienvenido Administrador. Que desea hacer?...");
+            System.out.println("1- Agregar empleado. ");
+            System.out.println("2- Eliminar empleado. ");
+            System.out.println("3- Ver lista de empleados. ");
+            System.out.println("4- Ver lista de reservas. ");
+            System.out.println("5- Ver lista de clientes. ");
+            System.out.println("6- . ");
+            System.out.println("- Salir. ");
 
-
+        }
+    }
 
     }
 

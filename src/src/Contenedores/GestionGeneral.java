@@ -63,6 +63,33 @@ public class GestionGeneral<T> {
     }
 
 
+    public String mostrar()
+    {
+        String mensaje ="";
+        Iterator<T> recorredor = listaRegistros.iterator();
+        while(recorredor.hasNext())
+        {
+            T actual = recorredor.next();
+            mensaje = mensaje.concat(actual.toString()+"\n");
+        }
+        return mensaje;
+    }
+
+
+    public T buscarObjetoYretornarlo(T objeto)
+    {
+        Iterator<T> recorredor = listaRegistros.iterator();
+        while (recorredor.hasNext())
+        {
+            T actual = recorredor.next();
+            if(actual.equals(objeto))
+            {
+                /// quiere decir que encontro ese objeto
+                return actual;
+            }
+        }
+        return null;
+    }
 
     /// ------------------------------------------------------------------------------------------------------------
 

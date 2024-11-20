@@ -23,6 +23,11 @@ public class Cliente extends Persona{
     public Cliente() {
     }
 
+    public Cliente(String nombre)
+    {
+        this.nombre = nombre;
+    }
+
     /// ---------------------------------------------------------------------------------------------------------------
 
 
@@ -81,7 +86,7 @@ public class Cliente extends Persona{
 
     @Override
     public JSONObject toJSON() {
-        JSONObject j = new JSONObject(); /// Llama al método ObjAJson de Persona
+        JSONObject j = super.toJSON(); /// Llama al método ObjAJson de Persona
         try {
             j.put("nacionalidad", this.nacionalidad);
             j.put("domicilio", this.domicilio.toJSON());

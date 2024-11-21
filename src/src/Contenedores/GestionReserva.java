@@ -42,15 +42,18 @@ public class GestionReserva implements IJSON {
         {
             throw new DniDeClienteNoRegistrado("El dni ingresado no pertenece a ningun cliente de nuestro sistema...");
         }
-        listaReservas.get(reservita.getDniCliente()).add(reservita);
         ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
-        while (recorredor.hasNext())
-        {
-         Habitacion actual = recorredor.next();
-         if(actual.getNumeroHabitacion()==reservita.getNumeroHabitacionReservada())
-             {
-                 actual.agregarReserva(reservita);
-             }
+        while (recorredor.hasNext()) {
+            Habitacion actual = recorredor.next();
+            if (actual.getNumeroHabitacion() == reservita.getNumeroHabitacionReservada()) {
+                if (!actual.estaDisponible(reservita.getCheckIn(), reservita.getCheckOut())) {
+                    throw new SinDisponibilidadException("La habitacion se encuentra ocupada para esa fecha");
+                } else {
+                    listaReservas.get(reservita.getDniCliente()).add(reservita);
+                    actual.agregarReserva(reservita);
+
+                }
+            }
         }
     }
     /// -----------------------------------------*-----------------------------------------

@@ -5,24 +5,20 @@ import Clientes.Domicilio;
 import Contenedores.GestionGeneral;
 import Contenedores.GestionReserva;
 import Enums.TipoEmpleado;
-import Excepciones.ContraseñasNoCoincideException;
-import Excepciones.ObjetoNoRegistradoException;
-import Excepciones.ObjetoYaRegistradoException;
+import Excepciones.*;
 import JSONUtiles.JSONUtiles;
 import MODELOS.Empleado;
 import Reserva.Reserva;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import Reserva.Habitacion;
 
 import java.io.File;
 import java.sql.SQLOutput;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.Objects;
-import java.util.Scanner;
+import java.util.*;
 
 public class Menu {
 
@@ -118,13 +114,14 @@ public class Menu {
 
         /// --------------------------------------------------*--------------------------------------------------------
         Boolean salirAux = false;
+        Empleado empleadoAux = new Empleado();
         System.out.println("Bienvenido al sistema del hotel UTN...");
         while (!salirAux) {
             System.out.println("\n\nPara poder ingresar al sistema debera ingresar su id de usuario.");
             System.out.println("Luego de verificar que exista y le pediremos su contraseña (No la comparta con nadie). Muchas gracias");
             System.out.println("Ingrese su id: ");
             int idIngresada = sc.nextInt();
-            Empleado empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
+            empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
             try {
                 if (empleadoAux == null) {
                     throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
@@ -134,101 +131,7 @@ public class Menu {
                     String contraseñaAux = sc.next();
                     if (empleadoAux.getContraseña().equals(contraseñaAux)) {
                         System.out.println("Contraseña correcta, redireccionandolo al sistema..");
-                        if(empleadoAux.getRol().equals(TipoEmpleado.ADMINISTRADOR))
-                        {
-                            /// METODO SWITCH PARA ADMINISTRADOR
-
-
-                            System.out.println("\n Bienvenido recepcionista!!! ");
-                            System.out.println(" Ingrese 1 si desea agregar una reserva. ");
-                            System.out.println(" Ingrese 2 si desea eliminar una reserva. ");
-                            System.out.println(" Ingrese 3 si desea buscar una reserva. ");
-                            System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
-                            System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
-                            System.out.println(" Ingrese 6 si desea ver todas las habitaciones. ");
-                            System.out.println(" Ingrese 7 si desea salir del programa. ");
-                            System.out.println("\n Ingrese su opcion aqui: ");
-
-                            int op = 0;
-                            op = sc.nextInt();
-
-                            switch (op) {
-                                case 1:
-                                    System.out.println("\n Opcion 1 elegida. ");
-
-                                    String dnicliente;
-                                    LocalDate checkIn = null;
-                                    LocalDate checkOut = null;
-                                    int numeroHabitacionReservada;
-
-                                    System.out.println("\n Ingrese el dni del cliente. ");
-                                    dnicliente = sc.next();
-                                    System.out.println("\n Ingrese entre que fecha y que otra fecha va a hacer su reserva. ");
-
-                                    while (checkIn == null) {
-                                        System.out.println(" 1ra fecha ( AAAA/MM/DD ) : ");
-                                        String fecha = sc.next();
-                                        try {
-                                            checkIn = LocalDate.parse(fecha);
-                                            System.out.println("Fecha ingresada correctamente: " + checkIn);
-                                        } catch (DateTimeParseException e) {
-                                            System.out.println("Formato inválido. Por favor, intente de nuevo.");
-                                        }
-                                    }
-
-                                    while (checkOut == null) {
-                                        System.out.println(" 2ra fecha ( AAAA/MM/DD ) : ");
-                                        String fecha = sc.next();
-                                        try {
-                                            checkOut = LocalDate.parse(fecha);
-                                            System.out.println("Fecha ingresada correctamente: " + checkOut);
-                                        } catch (DateTimeParseException e) {
-                                            System.out.println("Formato inválido. Por favor, intente de nuevo.");
-                                        }
-                                    }
-
-                                    System.out.println("\n Estas son las habitaciones disponibles. ");
-                                    System.out.println(gestionReservas.obtenerDisponibles(checkIn, checkOut));
-                                    System.out.println("\n Elija una para su reserva. ");
-                                    numeroHabitacionReservada = sc.nextInt();
-
-                                    gestionReservas.confirmarReserva(new Reserva(dnicliente, checkIn, checkOut, numeroHabitacionReservada));
-
-                                    break;
-                                case 2:
-                                    System.out.println("\n Opcion 2 elegida. ");
-                                    break;
-                                case 3:
-                                    System.out.println("\n Opcion 3 elegida. ");
-                                    break;
-                                case 4:
-                                    System.out.println("\n Opcion 4 elegida. ");
-                                    break;
-                                case 5:
-                                    System.out.println("\n Opcion 5 elegida. ");
-                                    break;
-                                case 6:
-                                    System.out.println("\n Opcion 6 elegida. ");
-                                    break;
-                                case 7:
-                                    System.out.println("\n Opcion 7 elegida. ");
-                                    break;
-                                case 8:
-                                    System.out.println("\n Opcion 7 elegida. ");
-                                    break;
-                                case 9:
-                                    System.out.println("\n Opcion 7 elegida. ");
-                                    break;
-                            }
-
-                        }else if(empleadoAux.getRol().equals(TipoEmpleado.RECEPCIONISTA)) {
-                            /// METODO SWITCH PARA RECPECIONISTA
-
-
-
-                        }
-                        salirAux = true;
-
+                        salirAux=true;
                     } else {
                         throw new ContraseñasNoCoincideException("La contraseña ingresada es incorrecta.");
                     }
@@ -238,6 +141,63 @@ public class Menu {
                 System.out.println("Error debido a que: " + e.getMessage());
             }
         }
+
+        /// BOOLEANO PARA EL SWITCH
+        Boolean salirSwitch = false;
+        while (!salirSwitch)
+        {
+            /// METODO SWITCH PARA ADMINISTRADOR
+
+
+            System.out.println("\n Bienvenido recepcionista!!! ");
+            System.out.println(" Ingrese 1 si desea agregar una reserva. ");
+            System.out.println(" Ingrese 2 si desea eliminar una reserva. ");
+            System.out.println(" Ingrese 3 si desea buscar una reserva. ");
+            System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
+            System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
+            System.out.println(" Ingrese 6 si desea ver todas las habitaciones. ");
+            System.out.println(" Ingrese 7 si desea salir del programa. ");
+            System.out.println("\n Ingrese su opcion aqui: ");
+
+            int op = 0;
+            op = sc.nextInt();
+
+            switch (op) {
+                case 1:
+                    System.out.println("\n Opcion 1 elegida. ");
+                    agregarReserva(gestionReservas,sc);
+                    break;
+                case 2:
+                    System.out.println("\n Opcion 2 elegida. ");
+                    break;
+                case 3:
+                    System.out.println("\n Opcion 3 elegida. ");
+                    break;
+                case 4:
+                    System.out.println("\n Opcion 4 elegida. ");
+                    break;
+                case 5:
+                    System.out.println("\n Opcion 5 elegida. ");
+                    break;
+                case 6:
+                    System.out.println("\n Opcion 6 elegida. ");
+                    break;
+                case 7:
+                    System.out.println("\n Opcion 7 elegida. ");
+                    break;
+                case 8:
+                    System.out.println("\n Opcion 7 elegida. ");
+                    break;
+                case 9:
+                    System.out.println("\n Opcion 7 elegida. ");
+                    break;
+            }
+
+        }
+
+
+
+
         /// GRABAMOS TODO PARA EL FINAL DEL PRGORAMA
         /// GRABAMOS LOS DATOS DE GESTION RESERVA
         JSONUtiles.grabar(new JSONArray().put(gestionReservas.toJSON()),"Reservas.json");
@@ -252,6 +212,69 @@ public class Menu {
 
 
     }
+
+  /// METODOS PARA LOS CASOS DEL SWITCH
+
+    public void agregarReserva(GestionReserva gestionReservas, Scanner sc)
+    {
+        String dnicliente;
+        LocalDate checkIn = null;
+        LocalDate checkOut = null;
+        int numeroHabitacionReservada;
+        try {
+            System.out.println("\n Ingrese el dni del cliente. ");
+            dnicliente = sc.next();
+            System.out.println("\n Ingrese entre que fecha y que otra fecha va a hacer su reserva. ");
+
+            while (checkIn == null) {
+                System.out.println("  Fecha de CheckIn ( AAAA-MM-DD ) : ");
+                String fecha = sc.next();
+                try {
+                    checkIn = LocalDate.parse(fecha);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato inválido. Por favor, intente de nuevo.");
+                }
+            }
+
+            while (checkOut == null) {
+                System.out.println("  Fecha checkOut ( AAAA-MM-DD ) : ");
+                String fecha = sc.next();
+                try {
+                    checkOut = LocalDate.parse(fecha);
+                } catch (DateTimeParseException e) {
+                    System.out.println("Formato inválido. Por favor, intente de nuevo.");
+                }
+            }
+            System.out.println("\n Estas son las habitaciones del hotel. ");
+            ArrayList<Habitacion> auxHabitaciones = gestionReservas.obtenerDisponibles(checkIn, checkOut);
+            System.out.println(mostrarAuxListHabitaciones(auxHabitaciones));
+            System.out.println("\n Elija una para su reserva. ");
+            numeroHabitacionReservada = sc.nextInt();
+            Reserva reservaAagregar = new Reserva(dnicliente, checkIn, checkOut, numeroHabitacionReservada);
+            reservaAagregar.verificarDatosReserva();
+            gestionReservas.confirmarReserva(reservaAagregar);
+            System.out.println("Reserva agregada con exito!");
+        }catch (DateTimeParseException | ErrorAlIngresarException | ErrorFechaException | DniDeClienteNoRegistrado | SinDisponibilidadException e)
+        {
+            System.out.println("Error debido a que: " + e.getMessage());
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
    /// METODO PARA MODULARIZAR LA SERIALIZACION DE LA GESTION DE EMPLEADOS
@@ -284,6 +307,19 @@ public class Menu {
          } catch (JSONException e) {
              e.printStackTrace();
          }
+     }
+
+
+     public String mostrarAuxListHabitaciones(ArrayList<Habitacion> listaAuxHabitaciones)
+     {
+         String mensaje = "";
+         ListIterator<Habitacion> recorredor = listaAuxHabitaciones.listIterator();
+         while (recorredor.hasNext())
+         {
+             Habitacion actual = recorredor.next();
+             mensaje = mensaje.concat(actual.toString()+"\n");
+         }
+         return mensaje;
      }
 }
 

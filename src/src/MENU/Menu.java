@@ -10,12 +10,15 @@ import Excepciones.ObjetoNoRegistradoException;
 import Excepciones.ObjetoYaRegistradoException;
 import JSONUtiles.JSONUtiles;
 import MODELOS.Empleado;
+import Reserva.Reserva;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.File;
 import java.sql.SQLOutput;
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Objects;
@@ -131,17 +134,105 @@ public class Menu {
                     String contraseñaAux = sc.next();
                     if (empleadoAux.getContraseña().equals(contraseñaAux)) {
                         System.out.println("Contraseña correcta, redireccionandolo al sistema..");
-                        salirAux = true;
                         if(empleadoAux.getRol().equals(TipoEmpleado.ADMINISTRADOR))
                         {
                             /// METODO SWITCH PARA ADMINISTRADOR
-                        }else if(empleadoAux.getRol().equals(TipoEmpleado.RECEPCIONISTA))
-                        {
+
+
+                            System.out.println("\n Bienvenido recepcionista!!! ");
+                            System.out.println(" Ingrese 1 si desea agregar una reserva. ");
+                            System.out.println(" Ingrese 2 si desea eliminar una reserva. ");
+                            System.out.println(" Ingrese 3 si desea buscar una reserva. ");
+                            System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
+                            System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
+                            System.out.println(" Ingrese 6 si desea ver todas las habitaciones. ");
+                            System.out.println(" Ingrese 7 si desea salir del programa. ");
+                            System.out.println("\n Ingrese su opcion aqui: ");
+
+                            int op = 0;
+                            op = sc.nextInt();
+
+                            switch (op) {
+                                case 1:
+                                    System.out.println("\n Opcion 1 elegida. ");
+
+                                    String dnicliente;
+                                    LocalDate checkIn = null;
+                                    LocalDate checkOut = null;
+                                    int numeroHabitacionReservada;
+
+                                    System.out.println("\n Ingrese el dni del cliente. ");
+                                    dnicliente = sc.next();
+                                    System.out.println("\n Ingrese entre que fecha y que otra fecha va a hacer su reserva. ");
+
+                                    while (checkIn == null) {
+                                        System.out.println(" 1ra fecha ( AAAA/MM/DD ) : ");
+                                        String fecha = sc.next();
+                                        try {
+                                            checkIn = LocalDate.parse(fecha);
+                                            System.out.println("Fecha ingresada correctamente: " + checkIn);
+                                        } catch (DateTimeParseException e) {
+                                            System.out.println("Formato inválido. Por favor, intente de nuevo.");
+                                        }
+                                    }
+
+                                    while (checkOut == null) {
+                                        System.out.println(" 2ra fecha ( AAAA/MM/DD ) : ");
+                                        String fecha = sc.next();
+                                        try {
+                                            checkOut = LocalDate.parse(fecha);
+                                            System.out.println("Fecha ingresada correctamente: " + checkOut);
+                                        } catch (DateTimeParseException e) {
+                                            System.out.println("Formato inválido. Por favor, intente de nuevo.");
+                                        }
+                                    }
+
+                                    System.out.println("\n Estas son las habitaciones disponibles. ");
+                                    System.out.println(gestionReservas.obtenerDisponibles(checkIn, checkOut));
+                                    System.out.println("\n Elija una para su reserva. ");
+                                    numeroHabitacionReservada = sc.nextInt();
+
+                                    gestionReservas.confirmarReserva(new Reserva(dnicliente, checkIn, checkOut, numeroHabitacionReservada));
+
+                                    break;
+                                case 2:
+                                    System.out.println("\n Opcion 2 elegida. ");
+                                    break;
+                                case 3:
+                                    System.out.println("\n Opcion 3 elegida. ");
+                                    break;
+                                case 4:
+                                    System.out.println("\n Opcion 4 elegida. ");
+                                    break;
+                                case 5:
+                                    System.out.println("\n Opcion 5 elegida. ");
+                                    break;
+                                case 6:
+                                    System.out.println("\n Opcion 6 elegida. ");
+                                    break;
+                                case 7:
+                                    System.out.println("\n Opcion 7 elegida. ");
+                                    break;
+                                case 8:
+                                    System.out.println("\n Opcion 7 elegida. ");
+                                    break;
+                                case 9:
+                                    System.out.println("\n Opcion 7 elegida. ");
+                                    break;
+                            }
+
+                        }else if(empleadoAux.getRol().equals(TipoEmpleado.RECEPCIONISTA)) {
                             /// METODO SWITCH PARA RECPECIONISTA
+
+
+
                         }
+                        salirAux = true;
+
                     } else {
                         throw new ContraseñasNoCoincideException("La contraseña ingresada es incorrecta.");
                     }
+
                 }
             } catch (ObjetoNoRegistradoException | ContraseñasNoCoincideException e) {
                 System.out.println("Error debido a que: " + e.getMessage());

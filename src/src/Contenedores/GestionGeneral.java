@@ -55,7 +55,7 @@ public class GestionGeneral<T> {
     public Boolean buscarObjeto(T objeto)
     {
         Boolean retorno = false;
-        if(!listaRegistros.contains(objeto))
+        if(listaRegistros.contains(objeto))
         {
          retorno = true;
         }

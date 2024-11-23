@@ -36,7 +36,7 @@ public class GestionReserva implements IJSON {
     }
     /// -----------------------------------------*-----------------------------------------
     /// METODO CONFIRMAR LA RESERVA
-    public void confirmarReserva(Reserva reservita) throws DniDeClienteNoRegistrado
+    public void confirmarReserva(Reserva reservita) throws DniDeClienteNoRegistrado,SinDisponibilidadException
     {
         if(!listaReservas.containsKey(reservita.getDniCliente()))
         {
@@ -45,11 +45,12 @@ public class GestionReserva implements IJSON {
         ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
         while (recorredor.hasNext()) {
             Habitacion actual = recorredor.next();
-            if (actual.getNumeroHabitacion() == reservita.getNumeroHabitacionReservada()) {
+            if (actual.getNumeroHabitacion()==reservita.getNumeroHabitacionReservada()) {
                 if (!actual.estaDisponible(reservita.getCheckIn(), reservita.getCheckOut())) {
                     throw new SinDisponibilidadException("La habitacion se encuentra ocupada para esa fecha");
                 } else {
                     listaReservas.get(reservita.getDniCliente()).add(reservita);
+                    System.out.println("hola");
                     actual.agregarReserva(reservita);
 
                 }

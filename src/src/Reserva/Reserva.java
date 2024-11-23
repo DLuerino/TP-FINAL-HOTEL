@@ -184,12 +184,12 @@ public class Reserva implements IJSON {
         try{
             reserva.setId(obj.getInt("Id"));
 
-            if(idGenerados.contains(reserva.id)){
+           /* if(idGenerados.contains(reserva.id)){
                 throw new IllegalArgumentException("ID duplicado: "+reserva.id);
             }
-            idGenerados.add(reserva.id);
+            idGenerados.add(reserva.id); */
 
-            reserva.setDniCliente(obj.getString("Dni"));
+            reserva.setDniCliente(obj.getString("DniCliente"));
             reserva.setCheckIn(LocalDate.parse(obj.getString("CheckIn")));
             reserva.setCheckOut(LocalDate.parse(obj.getString("CheckOut")));
             reserva.setNumeroHabitacionReservada(obj.getInt("NumeroHabitacionReservada"));

@@ -150,8 +150,8 @@ public class Menu {
 
 
             System.out.println("\n Bienvenido recepcionista!!! ");
-            System.out.println(" Ingrese 1 si desea agregar una reserva. ");
-            System.out.println(" Ingrese 2 si desea eliminar una reserva. ");
+            System.out.println(" Ingrese 1 si desea registrar una reserva. ");
+            System.out.println(" Ingrese 2 si desea registrar un cliente.");
             System.out.println(" Ingrese 3 si desea buscar una reserva. ");
             System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
             System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
@@ -165,10 +165,12 @@ public class Menu {
             switch (op) {
                 case 1:
                     System.out.println("\n Opcion 1 elegida. ");
+                    System.out.println(gestionReservas.mostrarHabitaciones());
                     agregarReserva(gestionReservas,sc);
                     break;
                 case 2:
                     System.out.println("\n Opcion 2 elegida. ");
+                    agregarCliente(gestionClientes,gestionReservas,sc);
                     break;
                 case 3:
                     System.out.println("\n Opcion 3 elegida. ");
@@ -189,7 +191,7 @@ public class Menu {
                     System.out.println("\n Opcion 7 elegida. ");
                     break;
                 case 9:
-                    System.out.println("\n Opcion 7 elegida. ");
+                    salirSwitch = true;
                     break;
             }
 
@@ -261,6 +263,50 @@ public class Menu {
     }
 
 
+    public void agregarCliente(GestionGeneral<Cliente> gestionClientes,GestionReserva gestioNReservas, Scanner sc)
+    {
+       try {
+           Cliente cliente = new Cliente();
+           sc.nextLine();
+           System.out.println("Ingrese el nombre del cliente: ");
+           cliente.setNombre(sc.nextLine());
+           System.out.println("Ingrese el apellido del cliente: ");
+           cliente.setApellido(sc.nextLine());
+           System.out.println("Ingrese el dni del cliente: ");
+           cliente.setDni(sc.nextLine());
+           System.out.println("Ingrese el gmail del cliente: ");
+           cliente.setGmail(sc.nextLine());
+           System.out.println("Ingrese la nacionalidad del cliente: ");
+           cliente.setNacionalidad(sc.nextLine());
+           System.out.println("Ingrese datos sobre el domicilio del cliente:  ");
+           System.out.println("Calle: ");
+           String calle = sc.nextLine();
+           System.out.println("Numero de calle: ");
+           int numeroCalle = sc.nextInt();
+           sc.nextLine();
+           Boolean departamento = null;
+           while (departamento == null) {
+               System.out.println("Departamento. Si  /  No");
+               String respuesta = sc.next();
+               if (respuesta.equalsIgnoreCase("si")) {
+                   departamento = true;
+               } else if (respuesta.equalsIgnoreCase("no")) {
+                   departamento = false;
+               } else {
+                   System.out.println("Respuesta invalida, responder con si o no");
+               }
+           }
+               cliente.setDomicilio(new Domicilio(calle,numeroCalle,departamento));
+               cliente.verificarCliente();
+               gestionClientes.agregarObjeto(cliente);
+               gestioNReservas.agregarDniDeClienteNuevo(cliente.getDni());
+               System.out.println("Cliente agregado con exito!");
+
+       }catch(InputMismatchException | ObjetoYaRegistradoException | DniIngresoException | ErrorAlIngresarException e)
+       {
+           System.out.println("Error debido a que: " + e.getMessage());
+       }
+    }
 
 
 

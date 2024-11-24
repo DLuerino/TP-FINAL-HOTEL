@@ -214,6 +214,24 @@ public class GestionReserva implements IJSON {
         return mensaje;
     }
 
+
+    public String mostrarTodasLasReservasPorHabitacion()
+    {
+        String mensaje = "";
+        ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
+        while (recorredor.hasNext())
+        {
+            Habitacion actualHabitacion = recorredor.next();
+            ListIterator<Reserva> recorredorAux = actualHabitacion.getListaReservas().listIterator();
+            while (recorredorAux.hasNext())
+            {
+                Reserva actualReserva = recorredorAux.next();
+                mensaje = mensaje.concat(actualReserva.toString()+"\n");
+            }
+        }
+        return mensaje;
+    }
+
     /// -----------------------------------------*-----------------------------------------
         /// Metodos para serializar y deserializar
 

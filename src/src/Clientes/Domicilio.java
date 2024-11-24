@@ -44,6 +44,16 @@ public class Domicilio implements IJSON {
     }
 
     /// -----------------------------------------------------------------------------------------------------------------
+    @Override
+    public String toString() {
+        return "Domicilio{" +
+                "calle='" + calle + '\'' +
+                ", numCalle=" + numCalle +
+                ", departamento=" + departamento +
+                '}';
+    }
+
+    /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public JSONObject toJSON() {

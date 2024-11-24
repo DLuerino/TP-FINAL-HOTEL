@@ -120,11 +120,6 @@ public class GestionReserva implements IJSON {
         }
 
     }
-
-
-
-
-
     /// -----------------------------------------*-----------------------------------------
     /// metodo agregar el dni de un cliente recien registrado al hashMap
     public void agregarDniDeClienteNuevo(String dniCliente)
@@ -176,6 +171,30 @@ public class GestionReserva implements IJSON {
         }
 
         /// retornar el SB convertido a String
+        return sb.toString();
+    }
+
+    /// mostrar el historial de reservas de un cliente
+
+    public String verReservasDeCliente(String dni){
+        StringBuilder sb=new StringBuilder();
+
+        if(!listaReservas.containsKey(dni)){
+            return "El cliente con DNI ["+dni+"] no tiene reservas registradas";
+        }
+
+        HashSet<Reserva> historial=listaReservas.get(dni);
+
+        sb.append("Reservas del cliente con DNI [").append(dni).append("]:\n");
+
+        if(historial.isEmpty()){
+            sb.append("No tiene reservas activas.\n");
+        }else {
+            for(Reserva reserva : historial){
+                sb.append(reserva.toString()).append("\n");
+            }
+        }
+
         return sb.toString();
     }
 

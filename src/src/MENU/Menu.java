@@ -149,14 +149,17 @@ public class Menu {
             /// METODO SWITCH PARA ADMINISTRADOR
 
 
-            System.out.println("\n Bienvenido recepcionista!!! ");
+            System.out.println("\n Bienvenido!!! ");
             System.out.println(" Ingrese 1 si desea registrar una reserva. ");
             System.out.println(" Ingrese 2 si desea registrar un cliente.");
-            System.out.println(" Ingrese 3 si desea buscar una reserva. ");
+            System.out.println(" Ingrese 3 si desea ver el historial de reservas de un cliente. ");
             System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
             System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
             System.out.println(" Ingrese 6 si desea ver todas las habitaciones. ");
-            System.out.println(" Ingrese 7 si desea salir del programa. ");
+            System.out.println(" Ingrese 7 si desea registrar un nuevo empleado.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 8 si desea despedir un empleado.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 9 si desea ver los empleados registrados.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 10 si desea salir del programa. ");
             System.out.println("\n Ingrese su opcion aqui: ");
 
             int op = 0;
@@ -174,6 +177,7 @@ public class Menu {
                     break;
                 case 3:
                     System.out.println("\n Opcion 3 elegida. ");
+                    mostrarHistorial(gestionReservas, sc);
                     break;
                 case 4:
                     System.out.println("\n Opcion 4 elegida. ");
@@ -188,9 +192,14 @@ public class Menu {
                     System.out.println("\n Opcion 7 elegida. ");
                     break;
                 case 8:
-                    System.out.println("\n Opcion 7 elegida. ");
+                    System.out.println("\n Opcion 8 elegida. ");
                     break;
                 case 9:
+                    System.out.println("\n Opcion 9 elegida. ");
+                    break;
+
+                case 10:
+                    System.out.println("\n Opcion 10 elegida. Saliendo del sistema!! ");
                     salirSwitch = true;
                     break;
             }
@@ -307,6 +316,14 @@ public class Menu {
            System.out.println("Error debido a que: " + e.getMessage());
        }
     }
+
+    public void mostrarHistorial(GestionReserva clientes, Scanner sc){
+        System.out.println("Ingrese el dni del cliente del cual desea ver el historial: ");
+        String dniCliente=sc.next();
+        System.out.println(clientes.verReservasDeCliente(dniCliente));
+    }
+
+    /// -----------------------------------------*-----------------------------------------
 
 
 

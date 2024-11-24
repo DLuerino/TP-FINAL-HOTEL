@@ -69,9 +69,9 @@ public class Menu {
         if (!fileEmpleados.exists()) {
 
             try {
-                gestionEmpleados.agregarObjeto(new Empleado("Facundo", "Galeano", "galeanofacundo752@gmail.com", "utntpfinal", TipoEmpleado.ADMINISTRADOR));
-                gestionEmpleados.agregarObjeto(new Empleado("Diego", "Luerino", "lueriodiego@gmail.com", "utntpfinal", TipoEmpleado.ADMINISTRADOR));
-                gestionEmpleados.agregarObjeto(new Empleado("Marco", "Olivero", "marcoolivero@gmail.com", "utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleados.agregarObjeto(new Empleado("Facundo", "Galeano", "galeanofacundo752@gmail.com", 0 ,"utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleados.agregarObjeto(new Empleado("Diego", "Luerino", "lueriodiego@gmail.com", 1, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleados.agregarObjeto(new Empleado("Marco", "Olivero", "marcoolivero@gmail.com", 2, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
             } catch (ObjetoYaRegistradoException e) {
                 System.out.println("Error debido a que: " + e.getMessage());
             }
@@ -205,9 +205,20 @@ public class Menu {
                     break;
                 case 9:
                     System.out.println("\n Opcion 9 elegida. ");
+                    registrarEmpleado(gestionEmpleados, sc);
                     break;
 
                 case 10:
+                    System.out.println("\n Opcion 9 elegida. ");
+                    break;
+
+
+                case 11:
+                    System.out.println("\n Opcion 9 elegida. ");
+                    break;
+
+
+                case 12:
                     System.out.println("\n Opcion 10 elegida. Saliendo del sistema!! ");
                     salirSwitch = true;
                     break;
@@ -364,6 +375,7 @@ public class Menu {
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
+    /// CASE 7
    public void eliminarReserva(GestionReserva gestionReservas, Scanner sc,GestionGeneral<Cliente> gestionClientes)
    {
        System.out.println("Ingrese el dni del cliente del cual quiere eliminar una reserva:");
@@ -388,15 +400,6 @@ public class Menu {
        }
    }
 
-
-
-
-
-
-
-
-
-
      /// CASE 8
     public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, GestionReserva gestionReservas ,Scanner sc){
         System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista.\n ");
@@ -414,6 +417,33 @@ public class Menu {
             System.out.println("\n Cliente de dni " +aux.getDni()+ " ha sido eliminado de la lista. ");
         }catch (ObjetoNoRegistradoException | ReservaErrorException e){
             System.out.println("El cliente no se puede eliminar debido a que: " + e.getMessage());
+        }
+    }
+
+    /// CASE 9
+    public void registrarEmpleado(GestionGeneral<Empleado> gestionEmpleados, Scanner sc){
+        String nombre;
+        String apellido;
+        String gmail;
+        String contrasenia;
+
+        try{
+            System.out.println("\nIngrese el nombre del empleado: ");
+            nombre=sc.next();
+            System.out.println("\nIngrese el apellido del empleado: ");
+            apellido=sc.next();
+            System.out.println("\nIngrese el gmail del empleado: ");
+            gmail=sc.next();
+            System.out.println("\nIngrese la contraseña que desea darle al nuevo recepcionista: ");
+            contrasenia=sc.next();
+
+            Empleado emp=new Empleado(nombre,apellido,gmail,contrasenia, TipoEmpleado.RECEPCIONISTA);
+            emp.verificarEmpleado();
+            gestionEmpleados.agregarObjeto(emp);
+            System.out.println("\nEmpleado con ID["+emp.getId()+"] NOMBRE["+emp.getNombre()+"] agregado con exito! ");
+            System.out.println("No olvides anotar el ID y CONTRASEÑA para poder ingresar al sistema!!");
+        }catch (ObjetoYaRegistradoException  | ErrorAlIngresarException e){
+            System.out.println("\nError debido a que: "+e.getMessage());
         }
     }
 

@@ -63,6 +63,20 @@ public class GestionGeneral<T> {
     }
 
 
+    public T buscarObjetoYretornarlo(T objeto)
+    {
+        Iterator<T> recorredor = listaRegistros.iterator();
+        while (recorredor.hasNext())
+        {
+            T actual = recorredor.next();
+            if(actual.equals(objeto))
+            {
+                /// quiere decir que encontro ese objeto
+                return actual;
+            }
+        }
+        return null;
+    }
 
     /// ------------------------------------------------------------------------------------------------------------
 

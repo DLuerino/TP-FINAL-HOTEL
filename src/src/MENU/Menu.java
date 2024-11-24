@@ -14,6 +14,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import Reserva.Habitacion;
 
+import java.awt.*;
 import java.io.File;
 import java.sql.SQLOutput;
 import java.time.LocalDate;
@@ -156,10 +157,12 @@ public class Menu {
             System.out.println(" Ingrese 4 si desea ver todos los clientes. ");
             System.out.println(" Ingrese 5 si desea ver todas las reservas. ");
             System.out.println(" Ingrese 6 si desea ver todas las habitaciones. ");
-            System.out.println(" Ingrese 7 si desea registrar un nuevo empleado.(ADMINISTRADOR)");
-            System.out.println(" Ingrese 8 si desea despedir un empleado.(ADMINISTRADOR)");
-            System.out.println(" Ingrese 9 si desea ver los empleados registrados.(ADMINISTRADOR)");
-            System.out.println(" Ingrese 10 si desea salir del programa. ");
+            System.out.println(" Ingrese 7 si desea eliminar una reserva. ");
+            System.out.println(" Ingrese 8 si desea eliminar un cliente. ");
+            System.out.println(" Ingrese 9 si desea registrar un nuevo empleado.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 10 si desea despedir un empleado.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 11 si desea ver los empleados registrados.(ADMINISTRADOR)");
+            System.out.println(" Ingrese 12 si desea salir del programa. ");
             System.out.println("\n Ingrese su opcion aqui: ");
 
             int op = 0;
@@ -181,18 +184,22 @@ public class Menu {
                     break;
                 case 4:
                     System.out.println("\n Opcion 4 elegida. ");
+                    mostrarClientes(gestionClientes);
                     break;
                 case 5:
                     System.out.println("\n Opcion 5 elegida. ");
+                    mostrarReservas(gestionReservas);
                     break;
                 case 6:
                     System.out.println("\n Opcion 6 elegida. ");
+                    mostrarHabitaciones(gestionReservas);
                     break;
                 case 7:
                     System.out.println("\n Opcion 7 elegida. ");
                     break;
                 case 8:
                     System.out.println("\n Opcion 8 elegida. ");
+                    eliminarcliente(gestionClientes, sc);
                     break;
                 case 9:
                     System.out.println("\n Opcion 9 elegida. ");
@@ -327,7 +334,47 @@ public class Menu {
         }
     }
 
+    public void mostrarClientes(GestionGeneral<Cliente> gestionClientes)
+    {
+        String mensaje = "";
+        Iterator<Cliente> recorredor = gestionClientes.getListaRegistros().iterator();
+        while (recorredor.hasNext())
+        {
+           Cliente actual = recorredor.next();
+           mensaje = mensaje.concat(actual.toString()+"\n");
+        }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("Lista de clientes registrados en el sistema: \n");
+        System.out.println(mensaje);
+    }
+
+    public void mostrarReservas(GestionReserva gestionReservas)
+    {
+        System.out.println(gestionReservas.mostrarTodasLasReservasPorHabitacion());
+    }
+
+    public void mostrarHabitaciones(GestionReserva gestionReserva){
+        System.out.println(gestionReserva.mostrarHabitaciones());
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
+
+    /// 7)-
+
+    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, Scanner sc){
+        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista. ");
+        String dni = sc.next();
+        try{
+            Cliente aux = new Cliente();
+            aux.setDni(dni);
+            gestionClientes.eliminarObjeto(aux);
+            System.out.println("\n Cliente de dni " +aux.getDni()+ " ha sido eliminado de la lista. ");
+        }catch (ObjetoNoRegistradoException e){
+            e.printStackTrace();
+        }
+    }
+
     /// -----------------------------------------*-----------------------------------------
+
 
 
 
@@ -388,5 +435,11 @@ public class Menu {
          }
          return mensaje;
      }
+
+
+
+
+
+
 }
 

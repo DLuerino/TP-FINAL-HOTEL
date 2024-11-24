@@ -1,7 +1,9 @@
 package Contenedores;
+import Clientes.Cliente;
 import Enums.EstadoHabitacion;
 import Excepciones.DniDeClienteNoRegistrado;
 import Excepciones.DniIngresoException;
+import Excepciones.ReservaErrorException;
 import Excepciones.SinDisponibilidadException;
 import Interfaces.IJSON;
 import Reserva.Reserva;
@@ -133,25 +135,48 @@ public class GestionReserva implements IJSON {
     /// /// -----------------------------------------*-----------------------------------------
     /// METODOS PARA ELIMINAR
 
-    public String removeReserva(String dniCliente, Reserva reserva){
-        String msj="Error al eliminar la reserva! Intente de nuevo por favor.";
-
-        if(listaReservas.containsKey(dniCliente)){
-            HashSet<Reserva> reservasCliente= listaReservas.get(dniCliente);
-            reservasCliente.remove(reserva);
-
-            if(reservasCliente.isEmpty()){
-                listaReservas.remove(dniCliente);
-                 msj="La reserva ha sido eliminada con exito.";
+    public void eliminarReserva(int idAeliminar) throws ReservaErrorException
+    {
+        Boolean mensaje= false;
+        ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
+        while (recorredor.hasNext())
+        {
+            Habitacion actualHabitacion = recorredor.next();
+            ListIterator<Reserva> recorredorAux = actualHabitacion.getListaReservas().listIterator();
+            while (recorredorAux.hasNext())
+            {
+                Reserva actualReserva = recorredorAux.next();
+                if(actualReserva.getId()==idAeliminar)
+                {
+                    recorredorAux.remove();
+                    eliminarReservaDeHashMap(idAeliminar,actualReserva.getDniCliente());
+                    mensaje = true;
+                }
             }
         }
-
-        return msj;
+        if(mensaje==false)
+        {
+            throw new ReservaErrorException("El id ingresado no pertenece a ninguna reserva");
+        }
     }
 
     public void eliminarCliente(String dni)
     {
         listaReservas.remove(dni);
+    }
+
+
+    public void eliminarReservaDeHashMap(int idAeliminar, String dniCliente)
+    {
+        Iterator<Reserva> recorredor = listaReservas.get(dniCliente).iterator();
+        while (recorredor.hasNext())
+        {
+            Reserva actual = recorredor.next();
+            if(actual.getId()==idAeliminar)
+            {
+                recorredor.remove();
+            }
+        }
     }
 
     /// -----------------------------------------*-----------------------------------------
@@ -235,6 +260,26 @@ public class GestionReserva implements IJSON {
             }
         }
         return mensaje;
+    }
+
+    public ArrayList<Reserva> buscarReservasXdni(String dni)
+    {
+        ArrayList<Reserva> reservasDeEseDni = new ArrayList<>();
+        ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
+        while (recorredor.hasNext())
+        {
+            Habitacion actualHabitacion = recorredor.next();
+            ListIterator<Reserva> recorredorAux = actualHabitacion.getListaReservas().listIterator();
+            while (recorredorAux.hasNext())
+            {
+                Reserva actualReserva = recorredorAux.next();
+                if(actualReserva.getDniCliente().equals(dni))
+                {
+                    reservasDeEseDni.add(actualReserva);
+                }
+            }
+        }
+        return reservasDeEseDni;
     }
 
     /// -----------------------------------------*-----------------------------------------

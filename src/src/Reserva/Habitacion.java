@@ -83,6 +83,11 @@ public class Habitacion implements IJSON {
             listaReservas.add(reservita);
         }
     }
+
+    public void eliminarReserva(Reserva reservita)
+    {
+        listaReservas.remove(reservita);
+    }
     /// ---------------------------------------------------------------------------------------------------------------
     public Boolean estaDisponible(LocalDate checkIn, LocalDate checkOut) {
         for (Reserva reserva : listaReservas) {

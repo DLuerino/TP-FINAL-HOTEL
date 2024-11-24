@@ -1,6 +1,7 @@
 package Contenedores;
 import Enums.EstadoHabitacion;
 import Excepciones.DniDeClienteNoRegistrado;
+import Excepciones.DniIngresoException;
 import Excepciones.SinDisponibilidadException;
 import Interfaces.IJSON;
 import Reserva.Reserva;
@@ -176,11 +177,12 @@ public class GestionReserva implements IJSON {
 
     /// mostrar el historial de reservas de un cliente
 
-    public String verReservasDeCliente(String dni){
+    public String verReservasDeCliente(String dni) throws DniDeClienteNoRegistrado
+    {
         StringBuilder sb=new StringBuilder();
 
         if(!listaReservas.containsKey(dni)){
-            return "El cliente con DNI ["+dni+"] no tiene reservas registradas";
+            throw new DniDeClienteNoRegistrado("El dni ingresado no esta registrado en el sistema.");
         }
 
         HashSet<Reserva> historial=listaReservas.get(dni);

@@ -320,7 +320,11 @@ public class Menu {
     public void mostrarHistorial(GestionReserva clientes, Scanner sc){
         System.out.println("Ingrese el dni del cliente del cual desea ver el historial: ");
         String dniCliente=sc.next();
-        System.out.println(clientes.verReservasDeCliente(dniCliente));
+        try {
+            System.out.println(clientes.verReservasDeCliente(dniCliente));
+        } catch (DniDeClienteNoRegistrado e) {
+            System.out.println("Error debido a que: " + e.getMessage());
+        }
     }
 
     /// -----------------------------------------*-----------------------------------------

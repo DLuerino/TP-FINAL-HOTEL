@@ -137,7 +137,7 @@ public class Habitacion implements IJSON {
                 JSONObject reservaJSON=reservasArray.getJSONObject(i);
 
                /* Reserva reserva=new Reserva();///Reserva vacia
-                reserva.fromJSON(reservaJSON);///Reconstruir reserva */
+                reserva.fromJSON(reservaJSON);///Reconstruir reserva ?????????????????????????????????????*/
                 habitacion.listaReservas.add(Reserva.fromJSON(reservaJSON));
             }
         }catch (JSONException e){

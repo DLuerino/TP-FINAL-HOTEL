@@ -192,12 +192,14 @@ public class Menu {
                     break;
                 case 6:
                     System.out.println("\n Opcion 6 elegida. ");
+                    mostrarHabitaciones(gestionReservas);
                     break;
                 case 7:
                     System.out.println("\n Opcion 7 elegida. ");
                     break;
                 case 8:
                     System.out.println("\n Opcion 8 elegida. ");
+                    eliminarcliente(gestionClientes, sc);
                     break;
                 case 9:
                     System.out.println("\n Opcion 9 elegida. ");
@@ -351,7 +353,28 @@ public class Menu {
         System.out.println(gestionReservas.mostrarTodasLasReservasPorHabitacion());
     }
 
+    public void mostrarHabitaciones(GestionReserva gestionReserva){
+        System.out.println(gestionReserva.mostrarHabitaciones());
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+    }
+
+    /// 7)-
+
+    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, Scanner sc){
+        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista. ");
+        String dni = sc.next();
+        try{
+            Cliente aux = new Cliente();
+            aux.setDni(dni);
+            gestionClientes.eliminarObjeto(aux);
+            System.out.println("\n Cliente de dni " +aux.getDni()+ " ha sido eliminado de la lista. ");
+        }catch (ObjetoNoRegistradoException e){
+            e.printStackTrace();
+        }
+    }
+
     /// -----------------------------------------*-----------------------------------------
+
 
 
 
@@ -412,6 +435,8 @@ public class Menu {
          }
          return mensaje;
      }
+
+
 
 
 

@@ -208,7 +208,7 @@ public class GestionReserva implements IJSON {
         while(recorredor.hasNext())
         {
             Habitacion habitacion = recorredor.next();
-            mensaje = mensaje.concat(habitacion.toString()+"\n");
+            mensaje = mensaje.concat(habitacion.toString()+"\n\n");
 
         }
         return mensaje;

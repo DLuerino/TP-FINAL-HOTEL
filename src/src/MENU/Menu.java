@@ -121,9 +121,10 @@ public class Menu {
             System.out.println("\n\nPara poder ingresar al sistema debera ingresar su id de usuario.");
             System.out.println("Luego de verificar que exista y le pediremos su contraseña (No la comparta con nadie). Muchas gracias");
             System.out.println("Ingrese su id: ");
+            try {
             int idIngresada = sc.nextInt();
             empleadoAux = gestionEmpleados.buscarObjetoYretornarlo(new Empleado(idIngresada));
-            try {
+
                 if (empleadoAux == null) {
                     throw new ObjetoNoRegistradoException("El id ingresado no tiene relacion con ningun objeto registrado");
                 } else {
@@ -138,8 +139,9 @@ public class Menu {
                     }
 
                 }
-            } catch (ObjetoNoRegistradoException | ContraseñasNoCoincideException e) {
+            } catch (ObjetoNoRegistradoException | ContraseñasNoCoincideException | InputMismatchException e) {
                 System.out.println("Error debido a que: " + e.getMessage());
+                sc.nextLine();
             }
         }
 
@@ -171,7 +173,6 @@ public class Menu {
             switch (op) {
                 case 1:
                     System.out.println("\n Opcion 1 elegida. ");
-                    System.out.println(gestionReservas.mostrarHabitaciones());
                     agregarReserva(gestionReservas,sc);
                     break;
                 case 2:
@@ -196,10 +197,11 @@ public class Menu {
                     break;
                 case 7:
                     System.out.println("\n Opcion 7 elegida. ");
+                    eliminarReserva(gestionReservas,sc,gestionClientes);
                     break;
                 case 8:
                     System.out.println("\n Opcion 8 elegida. ");
-                    eliminarcliente(gestionClientes, sc);
+                    eliminarcliente(gestionClientes,gestionReservas,sc);
                     break;
                 case 9:
                     System.out.println("\n Opcion 9 elegida. ");
@@ -232,7 +234,7 @@ public class Menu {
     }
 
   /// METODOS PARA LOS CASOS DEL SWITCH
-
+   /// CASE 1
     public void agregarReserva(GestionReserva gestionReservas, Scanner sc)
     {
         String dnicliente;
@@ -278,7 +280,7 @@ public class Menu {
         }
     }
 
-
+  /// CASE 2
     public void agregarCliente(GestionGeneral<Cliente> gestionClientes,GestionReserva gestioNReservas, Scanner sc)
     {
        try {
@@ -324,6 +326,7 @@ public class Menu {
        }
     }
 
+    /// CASE 3
     public void mostrarHistorial(GestionReserva clientes, Scanner sc){
         System.out.println("Ingrese el dni del cliente del cual desea ver el historial: ");
         String dniCliente=sc.next();
@@ -334,6 +337,7 @@ public class Menu {
         }
     }
 
+    /// CASE 4
     public void mostrarClientes(GestionGeneral<Cliente> gestionClientes)
     {
         String mensaje = "";
@@ -348,28 +352,68 @@ public class Menu {
         System.out.println(mensaje);
     }
 
+    /// CASE 5
     public void mostrarReservas(GestionReserva gestionReservas)
     {
         System.out.println(gestionReservas.mostrarTodasLasReservasPorHabitacion());
     }
 
+    /// CASE 6
     public void mostrarHabitaciones(GestionReserva gestionReserva){
         System.out.println(gestionReserva.mostrarHabitaciones());
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 
-    /// 7)-
+   public void eliminarReserva(GestionReserva gestionReservas, Scanner sc,GestionGeneral<Cliente> gestionClientes)
+   {
+       System.out.println("Ingrese el dni del cliente del cual quiere eliminar una reserva:");
+       try {
+           Cliente cliente = new Cliente();
+           cliente.setDni(sc.next());
+           if(!gestionClientes.buscarObjeto(cliente))
+           {
+               throw new ObjetoNoRegistradoException("El dni no pertenece a ningun objeto del sistema.");
+           }
+           ArrayList<Reserva> reservasXdni = gestionReservas.buscarReservasXdni(cliente.getDni());
+           System.out.println("Reservas actuales bajo el dni " + cliente.getDni() + ":");
+           System.out.println(mostrarReservasAux(reservasXdni));
+           System.out.println("Ingrese el id de la reserva a eliminar: ");
+           int id = sc.nextInt();
+           gestionReservas.eliminarReserva(id);
+           System.out.println("Reserva eliminado con exito!");
 
-    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, Scanner sc){
-        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista. ");
+       }catch (ObjetoNoRegistradoException | InputMismatchException | ReservaErrorException e)
+       {
+           System.out.println("Error debido a que: " + e.getMessage());
+       }
+   }
+
+
+
+
+
+
+
+
+
+
+     /// CASE 8
+    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, GestionReserva gestionReservas ,Scanner sc){
+        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista.\n ");
         String dni = sc.next();
         try{
             Cliente aux = new Cliente();
             aux.setDni(dni);
+            ArrayList<Reserva> auxArray = gestionReservas.buscarReservasXdni(aux.getDni());
+            if(!auxArray.isEmpty())
+            {
+                throw new ReservaErrorException("Tiene reservas pendientes, eliminelas antes de eliminar al usuario.");
+            }
             gestionClientes.eliminarObjeto(aux);
+            gestionReservas.eliminarCliente(aux.getDni());
             System.out.println("\n Cliente de dni " +aux.getDni()+ " ha sido eliminado de la lista. ");
-        }catch (ObjetoNoRegistradoException e){
-            e.printStackTrace();
+        }catch (ObjetoNoRegistradoException | ReservaErrorException e){
+            System.out.println("El cliente no se puede eliminar debido a que: " + e.getMessage());
         }
     }
 
@@ -431,6 +475,17 @@ public class Menu {
          while (recorredor.hasNext())
          {
              Habitacion actual = recorredor.next();
+             mensaje = mensaje.concat(actual.toString()+"\n");
+         }
+         return mensaje;
+     }
+     public String mostrarReservasAux(ArrayList<Reserva> listaAuxReservas)
+     {
+         String mensaje = "";
+         ListIterator<Reserva> recorredor = listaAuxReservas.listIterator();
+         while (recorredor.hasNext())
+         {
+             Reserva actual = recorredor.next();
              mensaje = mensaje.concat(actual.toString()+"\n");
          }
          return mensaje;

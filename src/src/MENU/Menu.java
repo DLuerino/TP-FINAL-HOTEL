@@ -171,7 +171,6 @@ public class Menu {
             switch (op) {
                 case 1:
                     System.out.println("\n Opcion 1 elegida. ");
-                    System.out.println(gestionReservas.mostrarHabitaciones());
                     agregarReserva(gestionReservas,sc);
                     break;
                 case 2:
@@ -199,7 +198,7 @@ public class Menu {
                     break;
                 case 8:
                     System.out.println("\n Opcion 8 elegida. ");
-                    eliminarcliente(gestionClientes, sc);
+                    eliminarcliente(gestionClientes,gestionReservas,sc);
                     break;
                 case 9:
                     System.out.println("\n Opcion 9 elegida. ");
@@ -360,16 +359,17 @@ public class Menu {
 
     /// 7)-
 
-    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, Scanner sc){
-        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista. ");
+    public void eliminarcliente(GestionGeneral<Cliente> gestionClientes, GestionReserva gestionReservas ,Scanner sc){
+        System.out.println("\n Ingrese el dni del cliente que desee borrar de la lista.\n ");
         String dni = sc.next();
         try{
             Cliente aux = new Cliente();
             aux.setDni(dni);
             gestionClientes.eliminarObjeto(aux);
+            gestionReservas.eliminarCliente(aux.getDni());
             System.out.println("\n Cliente de dni " +aux.getDni()+ " ha sido eliminado de la lista. ");
         }catch (ObjetoNoRegistradoException e){
-            e.printStackTrace();
+            System.out.println("Error debido a que: " + e.getMessage());
         }
     }
 

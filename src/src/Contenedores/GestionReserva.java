@@ -129,7 +129,7 @@ public class GestionReserva implements IJSON {
     }
 
     /// -----------------------------------------*-----------------------------------------
-
+    /// METODOS PARA BORRAR RESERVAS
 
     public String removeReserva(String dniCliente, Reserva reserva){
         String msj="Error al eliminar la reserva! Intente de nuevo por favor.";
@@ -147,6 +147,10 @@ public class GestionReserva implements IJSON {
         return msj;
     }
 
+    public void eliminarReservaXdni(String dniCliente){
+        /// buscamos con el metodo de HABITACION
+
+    }
 
 
     /// -----------------------------------------*-----------------------------------------

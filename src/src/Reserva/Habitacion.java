@@ -95,6 +95,21 @@ public class Habitacion implements IJSON {
     }
 
     /// -----------------------------------------------------------------------------------------------------------------
+    /// Metodo buscar una reserva por DNI
+
+    public ArrayList<Reserva> buscarReservaXdni(String DniCliente){
+        ArrayList<Reserva> reservasEncontradas=new ArrayList<>();
+
+        for(Reserva reserva : listaReservas){
+            if(reserva.getDniCliente().equals(DniCliente)){
+                reservasEncontradas.add(reserva);
+            }
+        }
+
+        return reservasEncontradas;
+    }
+
+    /// -----------------------------------------------------------------------------------------------------------------
 
     @Override
     public JSONObject toJSON() {

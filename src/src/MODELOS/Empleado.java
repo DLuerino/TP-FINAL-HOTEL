@@ -21,7 +21,6 @@ public class Empleado extends Persona{
     }
 
     public Empleado(){
-        this.id = ultimoId++;
     }
 
     public Empleado(int id)

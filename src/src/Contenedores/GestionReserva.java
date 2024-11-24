@@ -1,6 +1,7 @@
 package Contenedores;
 import Enums.EstadoHabitacion;
 import Excepciones.DniDeClienteNoRegistrado;
+import Excepciones.DniIngresoException;
 import Excepciones.SinDisponibilidadException;
 import Interfaces.IJSON;
 import Reserva.Reserva;
@@ -36,21 +37,25 @@ public class GestionReserva implements IJSON {
     }
     /// -----------------------------------------*-----------------------------------------
     /// METODO CONFIRMAR LA RESERVA
-    public void confirmarReserva(Reserva reservita) throws DniDeClienteNoRegistrado
+    public void confirmarReserva(Reserva reservita) throws DniDeClienteNoRegistrado,SinDisponibilidadException
     {
         if(!listaReservas.containsKey(reservita.getDniCliente()))
         {
             throw new DniDeClienteNoRegistrado("El dni ingresado no pertenece a ningun cliente de nuestro sistema...");
         }
-        listaReservas.get(reservita.getDniCliente()).add(reservita);
         ListIterator<Habitacion> recorredor = listaHabitaciones.listIterator();
-        while (recorredor.hasNext())
-        {
-         Habitacion actual = recorredor.next();
-         if(actual.getNumeroHabitacion()==reservita.getNumeroHabitacionReservada())
-             {
-                 actual.agregarReserva(reservita);
-             }
+        while (recorredor.hasNext()) {
+            Habitacion actual = recorredor.next();
+            if (actual.getNumeroHabitacion()==reservita.getNumeroHabitacionReservada()) {
+                if (!actual.estaDisponible(reservita.getCheckIn(), reservita.getCheckOut())) {
+                    throw new SinDisponibilidadException("La habitacion se encuentra ocupada para esa fecha");
+                } else {
+                    listaReservas.get(reservita.getDniCliente()).add(reservita);
+                    System.out.println("hola");
+                    actual.agregarReserva(reservita);
+
+                }
+            }
         }
     }
     /// -----------------------------------------*-----------------------------------------
@@ -116,11 +121,6 @@ public class GestionReserva implements IJSON {
         }
 
     }
-
-
-
-
-
     /// -----------------------------------------*-----------------------------------------
     /// metodo agregar el dni de un cliente recien registrado al hashMap
     public void agregarDniDeClienteNuevo(String dniCliente)
@@ -172,6 +172,31 @@ public class GestionReserva implements IJSON {
         }
 
         /// retornar el SB convertido a String
+        return sb.toString();
+    }
+
+    /// mostrar el historial de reservas de un cliente
+
+    public String verReservasDeCliente(String dni) throws DniDeClienteNoRegistrado
+    {
+        StringBuilder sb=new StringBuilder();
+
+        if(!listaReservas.containsKey(dni)){
+            throw new DniDeClienteNoRegistrado("El dni ingresado no esta registrado en el sistema.");
+        }
+
+        HashSet<Reserva> historial=listaReservas.get(dni);
+
+        sb.append("Reservas del cliente con DNI [").append(dni).append("]:\n");
+
+        if(historial.isEmpty()){
+            sb.append("No tiene reservas activas.\n");
+        }else {
+            for(Reserva reserva : historial){
+                sb.append(reserva.toString()).append("\n");
+            }
+        }
+
         return sb.toString();
     }
 

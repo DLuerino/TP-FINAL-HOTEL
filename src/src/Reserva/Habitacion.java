@@ -78,6 +78,9 @@ public class Habitacion implements IJSON {
         if(listaReservas.contains(reservita))
         {
          throw new ReservaYaRegistradaException("La reserva ya se encuentra registrada en el sistema");
+        }else
+        {
+            listaReservas.add(reservita);
         }
     }
     /// ---------------------------------------------------------------------------------------------------------------
@@ -133,9 +136,9 @@ public class Habitacion implements IJSON {
             for(int i=0; i<reservasArray.length(); i++){
                 JSONObject reservaJSON=reservasArray.getJSONObject(i);
 
-                Reserva reserva=new Reserva();///Reserva vacia
-                reserva.fromJSON(reservaJSON);///Reconstruir reserva
-                habitacion.listaReservas.add(reserva);
+               /* Reserva reserva=new Reserva();///Reserva vacia
+                reserva.fromJSON(reservaJSON);///Reconstruir reserva ?????????????????????????????????????*/
+                habitacion.listaReservas.add(Reserva.fromJSON(reservaJSON));
             }
         }catch (JSONException e){
             e.printStackTrace();

@@ -62,6 +62,7 @@ public class GestionGeneral<T> {
         return retorno;
     }
 
+      /// MOSTRAR
 
     public String mostrar()
     {
@@ -76,6 +77,7 @@ public class GestionGeneral<T> {
     }
 
 
+     /// BUSCAR
     public T buscarObjetoYretornarlo(T objeto)
     {
         Iterator<T> recorredor = listaRegistros.iterator();

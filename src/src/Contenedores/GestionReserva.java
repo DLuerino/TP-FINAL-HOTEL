@@ -183,29 +183,6 @@ public class GestionReserva implements IJSON {
     /// -----------------------------------------*-----------------------------------------
      /// METODOS PARA MOSTRAR
 
-    public String mostrarTodasLasReservas(){
-        StringBuilder sb=new StringBuilder();
-
-        /// recorrer hashmap
-        for(String dniCliente : listaReservas.keySet()){
-            sb.append("[ Reservas del cliente con DNI: ").append(dniCliente).append(" ]\n");
-
-            HashSet<Reserva> reservasCliente=listaReservas.get(dniCliente);
-            if(reservasCliente.isEmpty()){
-                sb.append(" No tiene reservas.\n");
-            }else{
-                /// aca se recorre las reservas de ese dni
-
-                for(Reserva reserva : reservasCliente){
-                    sb.append(" -").append(reserva.toString()).append("\n");
-                }
-            }
-        }
-
-        /// retornar el SB convertido a String
-        return sb.toString();
-    }
-
     /// mostrar el historial de reservas de un cliente
 
     public String verReservasDeCliente(String dni) throws DniDeClienteNoRegistrado
@@ -263,6 +240,9 @@ public class GestionReserva implements IJSON {
         return mensaje;
     }
 
+    /// -----------------------------------------*-----------------------------------------
+
+    /// METODO BUSCAR
     public ArrayList<Reserva> buscarReservasXdni(String dni)
     {
         ArrayList<Reserva> reservasDeEseDni = new ArrayList<>();

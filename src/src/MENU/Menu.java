@@ -229,10 +229,7 @@ public class Menu {
 
         }
 
-
-
-
-        /// GRABAMOS TODO PARA EL FINAL DEL PRGORAMA
+        /// GRABAMOS TODO PARA EL FINAL DEL PROGRAMA
         /// GRABAMOS LOS DATOS DE GESTION RESERVA
         JSONUtiles.grabar(new JSONArray().put(gestionReservas.toJSON()),"Reservas.json");
 
@@ -242,10 +239,10 @@ public class Menu {
         /// GRABAMOS LOS DATOS DE GESTION EMPLEADOS
         serializarGestionEmpleados(gestionEmpleados,empleadosNombreArchivo);
 
-
-
-
     }
+
+
+    /// -----------------------------------------*-----------------------------------------
 
   /// METODOS PARA LOS CASOS DEL SWITCH
    /// CASE 1
@@ -311,6 +308,7 @@ public class Menu {
            System.out.println("Ingrese la nacionalidad del cliente: ");
            cliente.setNacionalidad(sc.nextLine());
            System.out.println("Ingrese datos sobre el domicilio del cliente:  ");
+           System.out.println("(DATOS OPCIONALES)");
            System.out.println("Calle: ");
            String calle = sc.nextLine();
            System.out.println("Numero de calle: ");
@@ -473,20 +471,32 @@ public class Menu {
 
     /// -----------------------------------------*-----------------------------------------
 
+    /// AUXILIARES
+    public String mostrarAuxListHabitaciones(ArrayList<Habitacion> listaAuxHabitaciones)
+    {
+        String mensaje = "";
+        ListIterator<Habitacion> recorredor = listaAuxHabitaciones.listIterator();
+        while (recorredor.hasNext())
+        {
+            Habitacion actual = recorredor.next();
+            mensaje = mensaje.concat(actual.toString()+"\n");
+        }
+        return mensaje;
+    }
+    public String mostrarReservasAux(ArrayList<Reserva> listaAuxReservas)
+    {
+        String mensaje = "";
+        ListIterator<Reserva> recorredor = listaAuxReservas.listIterator();
+        while (recorredor.hasNext())
+        {
+            Reserva actual = recorredor.next();
+            mensaje = mensaje.concat(actual.toString()+"\n");
+        }
+        return mensaje;
+    }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
+    /// -----------------------------------------*-----------------------------------------
 
 
    /// METODO PARA MODULARIZAR LA SERIALIZACION DE LA GESTION DE EMPLEADOS
@@ -522,28 +532,7 @@ public class Menu {
      }
 
 
-     public String mostrarAuxListHabitaciones(ArrayList<Habitacion> listaAuxHabitaciones)
-     {
-         String mensaje = "";
-         ListIterator<Habitacion> recorredor = listaAuxHabitaciones.listIterator();
-         while (recorredor.hasNext())
-         {
-             Habitacion actual = recorredor.next();
-             mensaje = mensaje.concat(actual.toString()+"\n");
-         }
-         return mensaje;
-     }
-     public String mostrarReservasAux(ArrayList<Reserva> listaAuxReservas)
-     {
-         String mensaje = "";
-         ListIterator<Reserva> recorredor = listaAuxReservas.listIterator();
-         while (recorredor.hasNext())
-         {
-             Reserva actual = recorredor.next();
-             mensaje = mensaje.concat(actual.toString()+"\n");
-         }
-         return mensaje;
-     }
+
 
 
 

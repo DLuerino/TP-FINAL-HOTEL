@@ -216,6 +216,7 @@ public class Menu {
 
                 case 11:
                     System.out.println("\n Opcion 11 elegida. ");
+                    mostrarEmpleadosRegistrados(gestionEmpleados);
                     break;
 
 
@@ -461,6 +462,13 @@ public class Menu {
             System.out.println("Error debido a que: "+e.getMessage());
         }
     }
+
+    /// CASE 11
+    public void mostrarEmpleadosRegistrados(GestionGeneral<Empleado> gestionEmpleados){
+        System.out.println(gestionEmpleados.mostrar());
+        System.out.println("\n\n");
+    }
+
 
     /// -----------------------------------------*-----------------------------------------
 

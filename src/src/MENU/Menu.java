@@ -209,17 +209,18 @@ public class Menu {
                     break;
 
                 case 10:
-                    System.out.println("\n Opcion 9 elegida. ");
+                    System.out.println("\n Opcion 10 elegida. ");
+                    despedirEmpleado(gestionEmpleados, sc);
                     break;
 
 
                 case 11:
-                    System.out.println("\n Opcion 9 elegida. ");
+                    System.out.println("\n Opcion 11 elegida. ");
                     break;
 
 
                 case 12:
-                    System.out.println("\n Opcion 10 elegida. Saliendo del sistema!! ");
+                    System.out.println("\n Opcion 12 elegida. Saliendo del sistema!! ");
                     salirSwitch = true;
                     break;
             }
@@ -444,6 +445,20 @@ public class Menu {
             System.out.println("No olvides anotar el ID y CONTRASEÑA para poder ingresar al sistema!!");
         }catch (ObjetoYaRegistradoException  | ErrorAlIngresarException e){
             System.out.println("\nError debido a que: "+e.getMessage());
+        }
+    }
+
+    /// CASE 10
+    public void despedirEmpleado(GestionGeneral<Empleado> gestionEmpleados, Scanner sc){
+        System.out.println("Ingrese el ID del empleado que desea despedir: ");
+        try{
+            int eliminar=sc.nextInt();
+            Empleado aux=new Empleado();
+            aux.setId(eliminar);
+            gestionEmpleados.eliminarObjeto(aux);
+            System.out.println("Empleado ha sido despedido con exito! ");
+        }catch (ObjetoNoRegistradoException | IdNegativaException  | InputMismatchException e){
+            System.out.println("Error debido a que: "+e.getMessage());
         }
     }
 

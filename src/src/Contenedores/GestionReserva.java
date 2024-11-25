@@ -84,8 +84,8 @@ public class GestionReserva implements IJSON {
     /// metodo para actualizar el estado de las habitaciones
 
     public void realizarCheckOuts(){
+        //LocalDate hoy = LocalDate.of(2024,11,25);
         LocalDate hoy = LocalDate.now();
-
         for(Habitacion habitacion : listaHabitaciones){
             Iterator<Reserva> iterator = habitacion.getListaReservas().iterator();
 
@@ -125,6 +125,7 @@ public class GestionReserva implements IJSON {
     }
 
     /// /// -----------------------------------------*-----------------------------------------
+
     /// metodo agregar el dni de un cliente recien registrado al hashMap
     public void agregarDniDeClienteNuevo(String dniCliente)
     {
@@ -132,7 +133,7 @@ public class GestionReserva implements IJSON {
     }
 
 
-    /// /// -----------------------------------------*-----------------------------------------
+    /// -----------------------------------------*-----------------------------------------
     /// METODOS PARA ELIMINAR
 
     public void eliminarReserva(int idAeliminar) throws ReservaErrorException

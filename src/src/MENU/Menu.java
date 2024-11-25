@@ -151,7 +151,8 @@ public class Menu {
         {
             /// METODO SWITCH PARA ADMINISTRADOR
 
-
+            gestionReservas.realizarCheckIns();
+            gestionReservas.realizarCheckOuts();
             System.out.println("\n Bienvenido!!! ");
             System.out.println(" Ingrese 1 si desea registrar una reserva. ");
             System.out.println(" Ingrese 2 si desea registrar un cliente.");

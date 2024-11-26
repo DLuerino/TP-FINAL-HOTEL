@@ -67,17 +67,16 @@ public class Menu {
 
         /// ARCHIVO EMPLEADOS
         if (!fileEmpleados.exists()) {
-
+            GestionGeneral<Empleado> gestionEmpleadoAux = new GestionGeneral<>();
             try {
-                gestionEmpleados.agregarObjeto(new Empleado("Facundo", "Galeano", "galeanofacundo752@gmail.com", 0 ,"utntpfinal", TipoEmpleado.ADMINISTRADOR));
-                gestionEmpleados.agregarObjeto(new Empleado("Diego", "Luerino", "lueriodiego@gmail.com", 1, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
-                gestionEmpleados.agregarObjeto(new Empleado("Marco", "Olivero", "marcoolivero@gmail.com", 2, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
+
+                gestionEmpleadoAux.agregarObjeto(new Empleado("Facundo", "Galeano", "galeanofacundo752@gmail.com", 0 ,"utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleadoAux.agregarObjeto(new Empleado("Diego", "Luerino", "lueriodiego@gmail.com", 1, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
+                gestionEmpleadoAux.agregarObjeto(new Empleado("Marco", "Olivero", "marcoolivero@gmail.com", 2, "utntpfinal", TipoEmpleado.ADMINISTRADOR));
             } catch (ObjetoYaRegistradoException e) {
                 System.out.println("Error debido a que: " + e.getMessage());
             }
-
-
-            serializarGestionEmpleados(gestionEmpleados,empleadosNombreArchivo);
+            serializarGestionEmpleados(gestionEmpleadoAux,empleadosNombreArchivo);
         }
 
         /// AHORA REALIZAMOS EL CODIGO QUE LEE LOS ARCHIVOS DEL PROGRAMA Y GUARDA LOS DATOS EN LAS VARIABLES GESTIONES ASI TRABAJAMOS CON ELLAS Y SUS DATOS

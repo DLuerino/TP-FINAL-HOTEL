@@ -1,21 +1,27 @@
 package MODELOS;
 
 import Enums.TipoEmpleado;
+import Excepciones.DniIngresoException;
+import Excepciones.ErrorAlIngresarException;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Random;
 
 public class Empleado extends Persona{
 
     private int id;
-    private static int ultimoId = 0;
     private String contraseña;
     private TipoEmpleado rol;
+    private static HashSet<Integer> idGenerados=new HashSet<>();
 
+
+    /// constructor recepcionista
     public Empleado(String nombre, String apellido, String gmail, String contraseña, TipoEmpleado rol) {
         super(nombre, apellido, gmail);
-        this.id = ultimoId++;
+        this.id =generarId();
         this.contraseña = contraseña;
         this.rol = rol;
     }
@@ -28,9 +34,29 @@ public class Empleado extends Persona{
         this.id = id;
     }
 
+    public Empleado(String nombre, String apellido, String gmail, int id, String contraseña, TipoEmpleado rol) {
+        super(nombre, apellido, gmail);
+        this.id = id;
+        this.contraseña = contraseña;
+        this.rol = rol;
+    }
+
     /// ---------------------------------------------------------------------------------------------------------------
 
     public int getId() {
+        return id;
+    }
+
+    private static int generarId(){
+        Random rand= new Random();
+        int id;
+
+        do{
+            id=rand.nextInt(1_000_000);
+        }while(idGenerados.contains(id)); ///si el id ya esta generado, lo que hace es generar uno nuevo
+
+        idGenerados.add(id); ///agrega el id al conjunto
+
         return id;
     }
 
@@ -56,6 +82,16 @@ public class Empleado extends Persona{
 
     /// ---------------------------------------------------------------------------------------------------------------
 
+    public void verificarEmpleado() throws ErrorAlIngresarException{
+
+        if(this.nombre.isEmpty() || this.apellido.isEmpty() || this.contraseña.isEmpty() || this.rol==null || this.contraseña==null || this.gmail.isEmpty()){
+            throw new ErrorAlIngresarException("\n Complete el espacio vacio. ");
+        }
+
+    }
+
+    /// ---------------------------------------------------------------------------------------------------------------
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -73,11 +109,13 @@ public class Empleado extends Persona{
 
     @Override
     public String toString() {
-        return "Empleado{" +super.toString()+
-                "id='" + id + '\'' +
-                ", contraseña='" + contraseña + '\'' +
-                ", rol=" + rol +
-                '}';
+        return "\n╔═════════════════════════════════════════════╗" +
+                "\n║                  EMPLEADO                   ║" +
+                "\n╠═════════════════════════════════════════════╣" +
+                "\n ID:             " + String.format("%-30s", this.id) +
+                ""+super.toString()+
+                "\n Contraseña:     " + String.format("%-30s", this.contraseña)+
+                "\n╠═════════════════════════════════════════════╣";
     }
 
     /// ---------------------------------------------------------------------------------------------------------------

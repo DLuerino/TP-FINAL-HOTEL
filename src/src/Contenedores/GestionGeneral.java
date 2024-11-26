@@ -55,14 +55,29 @@ public class GestionGeneral<T> {
     public Boolean buscarObjeto(T objeto)
     {
         Boolean retorno = false;
-        if(!listaRegistros.contains(objeto))
+        if(listaRegistros.contains(objeto))
         {
          retorno = true;
         }
         return retorno;
     }
 
+      /// MOSTRAR
 
+    public String mostrar()
+    {
+        String mensaje ="";
+        Iterator<T> recorredor = listaRegistros.iterator();
+        while(recorredor.hasNext())
+        {
+            T actual = recorredor.next();
+            mensaje = mensaje.concat(actual.toString()+"\n");
+        }
+        return mensaje;
+    }
+
+
+     /// BUSCAR
     public T buscarObjetoYretornarlo(T objeto)
     {
         Iterator<T> recorredor = listaRegistros.iterator();

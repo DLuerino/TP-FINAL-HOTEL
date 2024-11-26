@@ -46,9 +46,9 @@ public abstract class Persona implements IJSON {
     @Override
     public String toString() {
         return
-                "nombre='" + nombre + '\'' +
-                ", apellido='" + apellido + '\'' +
-                ", gmail='" + gmail + '\'' ;
+               " \n Nombre:          " + String.format("%-30s", this.nombre) +
+                "\n Apellido:        " + String.format("%-30s", this.apellido) +
+                "\n Gmail:           " + String.format("%-30s", this.gmail) ;
     }
 
     /// -------------------------------------------------------------------------------------------------------------

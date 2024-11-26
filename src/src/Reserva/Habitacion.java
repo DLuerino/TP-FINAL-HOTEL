@@ -65,11 +65,13 @@ public class Habitacion implements IJSON {
 
     @Override
     public String toString() {
-        return "Habitacion{" +
-                "numeroHabitacion=" + numeroHabitacion +
-                ", estado=" + estado +
-                ", listaReservas=" + listaReservas +
-                '}';
+        return "\n╔═════════════════════════════════════════════╗" +
+                "\n║              HABITACIÓN                     ║" +
+                "\n╠═════════════════════════════════════════════╣" +
+                "\n Número de Habitación: " + String.format("%-34d", this.numeroHabitacion) +
+                "\n Estado:           " + String.format("%-34s", this.estado) +
+                "\n Reservas:         " + String.format("%-34s", this.listaReservas)+
+                "\n╠═════════════════════════════════════════════╣";
     }
 
     /// ---------------------------------------------------------------------------------------------------------------

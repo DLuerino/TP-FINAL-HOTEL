@@ -117,13 +117,15 @@ public class Reserva implements IJSON {
 
     @Override
     public String toString() {
-        return "Reserva{" +
-                "id=" + id +
-                ", dniCliente='" + dniCliente + '\'' +
-                ", checkIn='" + checkIn + '\'' +
-                ", checkOut='" + checkOut + '\'' +
-                ", numeroHabitacionReservada=" + numeroHabitacionReservada +
-                '}';
+        return "\n╔═════════════════════════════════════════════╗" +
+                "\n║                  RESERVA                    ║" +
+                "\n╠═════════════════════════════════════════════╣" +
+                "\n ID Reserva:      " + String.format("%-35s", this.id) +
+                "\n DNI Cliente:     " + String.format("%-35s", this.dniCliente) +
+                "\n Check-In:        " + String.format("%-35s", this.checkIn) +
+                "\n Check-Out:       " + String.format("%-35s", this.checkOut) +
+                "\n Habitación:      " + String.format("%-35s", this.numeroHabitacionReservada)+
+                "\n╚═════════════════════════════════════════════╝";
     }
 
     /// -----------------------------------------*-----------------------------------------

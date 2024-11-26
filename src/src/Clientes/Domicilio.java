@@ -46,11 +46,9 @@ public class Domicilio implements IJSON {
     /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Domicilio{" +
-                "calle='" + calle + '\'' +
-                ", numCalle=" + numCalle +
-                ", departamento=" + departamento +
-                '}';
+        return "\n Calle:         " + String.format("%-35s", this.calle) +
+                "\n Número Calle:  " + String.format("%-35d", this.numCalle) +
+                "\n Departamento:   " + String.format("%-35s", this.departamento ? "Sí" : "No");
     }
 
     /// -----------------------------------------------------------------------------------------------------------------

@@ -69,11 +69,16 @@ public class Cliente extends Persona{
     /// -----------------------------------------------------------------------------------------------------------------
     @Override
     public String toString() {
-        return "Cliente{" +super.toString()+
-                ", nacionalidad='" + nacionalidad + '\'' +
-                "," + domicilio +
-                ", dni='" + dni + '\'' +
-                '}';
+        return "\n╔═════════════════════════════════════════════╗" +
+                "\n║                  CLIENTE                    ║" +
+                "\n╠═════════════════════════════════════════════╣" +
+                "\n DNI:            " + String.format("%-35s", this.dni) +
+                "\n Nombre:         " + String.format("%-35s", this.nombre) +
+                "\n Apellido:       " + String.format("%-35s", this.apellido) +
+                "\n Gmail:          " + String.format("%-35s", this.gmail) +
+                "\n Nacionalidad:   " + String.format("%-35s", this.nacionalidad) +
+                "\n Domicilio      " + String.format("%-35s", this.domicilio.toString()) +
+                "\n╚═════════════════════════════════════════════╝";
     }
 
     public void verificarCliente() throws ErrorAlIngresarException,DniIngresoException {

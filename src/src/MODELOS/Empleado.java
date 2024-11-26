@@ -109,11 +109,13 @@ public class Empleado extends Persona{
 
     @Override
     public String toString() {
-        return "Empleado{" +super.toString()+
-                "id='" + id + '\'' +
-                ", contraseña='" + contraseña + '\'' +
-                ", rol=" + rol +
-                '}';
+        return "\n╔═════════════════════════════════════════════╗" +
+                "\n║                  EMPLEADO                   ║" +
+                "\n╠═════════════════════════════════════════════╣" +
+                "\n ID:             " + String.format("%-30s", this.id) +
+                ""+super.toString()+
+                "\n Contraseña:     " + String.format("%-30s", this.contraseña)+
+                "\n╠═════════════════════════════════════════════╣";
     }
 
     /// ---------------------------------------------------------------------------------------------------------------

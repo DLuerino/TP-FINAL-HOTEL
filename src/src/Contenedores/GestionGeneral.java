@@ -2,6 +2,7 @@ package Contenedores;
 
 import Excepciones.ObjetoNoRegistradoException;
 import Excepciones.ObjetoYaRegistradoException;
+import Excepciones.SinContenidoException;
 import com.sun.jdi.ObjectCollectedException;
 
 import java.util.HashSet;
@@ -91,6 +92,14 @@ public class GestionGeneral<T> {
             }
         }
         return null;
+    }
+
+    public void VerificarVacio()
+    {
+        if(listaRegistros.isEmpty())
+        {
+            throw new SinContenidoException("No hay registros en el sistema.");
+        }
     }
 
     /// ------------------------------------------------------------------------------------------------------------

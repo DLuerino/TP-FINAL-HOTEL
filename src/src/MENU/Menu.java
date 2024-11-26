@@ -184,54 +184,87 @@ public class Menu {
 
             switch (op) {
                 case 1:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═════════════════════════════════╗");
                     System.out.println("║ Opción 1: Registrar una reserva ║");
                     System.out.println("╚═════════════════════════════════╝");
                     agregarReserva(gestionReservas,sc);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 2:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔════════════════════════════════╗");
                     System.out.println("║ Opción 2: Registrar un cliente ║");
                     System.out.println("╚════════════════════════════════╝");
                     agregarCliente(gestionClientes,gestionReservas,sc);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 3:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔════════════════════════════════════════╗");
                     System.out.println("║ Opción 3: Ver historial de reservas    ║");
                     System.out.println("╚════════════════════════════════════════╝");
                     mostrarHistorial(gestionReservas, sc);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 4:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═════════════════════════════════╗");
                     System.out.println("║ Opción 4: Ver todos los clientes ║");
                     System.out.println("╚════════════════════════════════╝");
                     mostrarClientes(gestionClientes);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 5:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔══════════════════════════╗");
                     System.out.println("║ Opción 5: Ver reservas   ║");
                     System.out.println("╚══════════════════════════╝");
                     mostrarReservas(gestionReservas);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 6:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔══════════════════════════╗");
                     System.out.println("║ Opción 6: Ver habitaciones   ║");
                     System.out.println("╚══════════════════════════╝");
                     mostrarHabitaciones(gestionReservas);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 7:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═══════════════════════════════╗");
                     System.out.println("║ Opción 7: Eliminar una reserva   ║");
                     System.out.println("╚════════════════════════════════╝");
                     eliminarReserva(gestionReservas,sc,gestionClientes);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 8:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═════════════════════════════╗");
                     System.out.println("║ Opción 8: Eliminar un cliente  ║");
                     System.out.println("╚══════════════════════════════╝");
                     eliminarcliente(gestionClientes,gestionReservas,sc);
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 9:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═══════════════════════════════════════╗");
                     System.out.println("║ Opción 9: Registrar un nuevo empleado ║");
                     System.out.println("╚═══════════════════════════════════════╝");
@@ -240,8 +273,12 @@ public class Menu {
                     }else{
                         registrarEmpleado(gestionEmpleados, sc);
                     }
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 10:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔═════════════════════════════════╗");
                     System.out.println("║ Opción 10: Despedir un empleado ║");
                     System.out.println("╚═════════════════════════════════╝");
@@ -250,8 +287,12 @@ public class Menu {
                     }else{
                         despedirEmpleado(gestionEmpleados, sc);
                     }
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 11:
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     System.out.println("\n╔══════════════════════════════════════╗");
                     System.out.println("║ Opción 11: Ver empleados registrados ║");
                     System.out.println("╚══════════════════════════════════════╝");
@@ -260,6 +301,9 @@ public class Menu {
                     }else{
                         mostrarEmpleadosRegistrados(gestionEmpleados);
                     }
+                    System.out.println("Ingrese cualquier tecla para continuar: ");
+                    sc.next();
+                    System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
                     break;
                 case 12:
                     System.out.println("\n╔════════════════════════════╗");
@@ -378,6 +422,10 @@ public class Menu {
                    System.out.println("Respuesta invalida, responder con si o no");
                }
            }
+               if(verificarQueExistaGmail(gestionClientes,cliente.getGmail()))
+               {
+                   throw new ErrorAlIngresarException("El gmail ingresado ya esta registrado en el sistema.");
+               }
                cliente.setDomicilio(new Domicilio(calle,numeroCalle,departamento));
                cliente.verificarCliente();
                gestionClientes.agregarObjeto(cliente);
@@ -407,6 +455,9 @@ public class Menu {
     public void mostrarClientes(GestionGeneral<Cliente> gestionClientes)
     {
         String mensaje = "";
+        try {
+            gestionClientes.VerificarVacio();
+
         Iterator<Cliente> recorredor = gestionClientes.getListaRegistros().iterator();
         while (recorredor.hasNext())
         {
@@ -416,6 +467,10 @@ public class Menu {
         System.out.println("Lista de clientes registrados en el sistema: \n");
         System.out.println(mensaje);
         System.out.println("\n");
+        }catch (SinContenidoException e)
+        {
+            System.out.println("Error debido a que: " + e.getMessage());
+        }
     }
 
     /// CASE 5
@@ -444,6 +499,10 @@ public class Menu {
                throw new ObjetoNoRegistradoException("El dni no pertenece a ningun objeto del sistema.");
            }
            ArrayList<Reserva> reservasXdni = gestionReservas.buscarReservasXdni(cliente.getDni());
+           if(reservasXdni.isEmpty())
+           {
+               throw new ReservaErrorException("No hay reservas registradas bajo este dni.");
+           }
            System.out.println("Reservas actuales bajo el dni " + cliente.getDni() + ":");
            System.out.println(mostrarReservasAux(reservasXdni));
            System.out.println("Ingrese el id de la reserva a eliminar: ");
@@ -561,6 +620,21 @@ public class Menu {
         return mensaje;
     }
 
+    public Boolean verificarQueExistaGmail(GestionGeneral<Cliente> gestionclientes, String gmail)
+    {
+        Boolean retorno = false;
+        Iterator<Cliente> recorredor = gestionclientes.getListaRegistros().iterator();
+        while (recorredor.hasNext())
+        {
+            Cliente actual = recorredor.next();
+            if(actual.getGmail().equals(gmail))
+            {
+                retorno=true;
+            }
+        }
+        return retorno;
+    }
+
 
     /// -----------------------------------------*-----------------------------------------
 
@@ -596,6 +670,8 @@ public class Menu {
              e.printStackTrace();
          }
      }
+
+
 
 
 

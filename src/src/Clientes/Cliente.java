@@ -1,5 +1,6 @@
 package Clientes;
 
+import Contenedores.GestionGeneral;
 import Excepciones.DniIngresoException;
 import Excepciones.ErrorAlIngresarException;
 import MODELOS.Persona;
@@ -7,6 +8,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.time.LocalDate;
+import java.util.Iterator;
 import java.util.Objects;
 
 public class Cliente extends Persona{
@@ -95,6 +97,8 @@ public class Cliente extends Persona{
             throw new DniIngresoException("El dni ingresado no puede contener espacios o letras.");
         }
     }
+
+
 
     /// -----------------------------------------------------------------------------------------------------------------
 
